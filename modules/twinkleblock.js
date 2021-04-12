@@ -39,7 +39,7 @@ Twinkle.block.callback = function twinkleblockCallback() {
 		return;
 	}
 	if (relevantUserName === 'Daniuu'){ //don't fight me with the weapon I helped creating
-		alert('Op de zevende dag schiep den here Twinkle. Hij verdoemde de persoon die dit gadget tegen zijn scheppers wou gebruiken, en zag dat het goed was.');
+		alert('Op de zevende dag schiep den Here Twinkle. Hij verdoemde de persoon die dit gadget tegen zijn scheppers wou gebruiken, en zag dat het goed was.');
 		return;
 	}
 	if (relevantUserName === mw.config.get('wgUserName') &&
