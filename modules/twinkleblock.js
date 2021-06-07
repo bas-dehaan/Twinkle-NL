@@ -1217,7 +1217,7 @@ Twinkle.block.callback.update_form = function twinkleblockCallbackUpdateForm(e, 
 
 Twinkle.block.callback.change_template = function twinkleblockcallbackChangeTemplate(e) {
 	var form = e.target.form, value = form.template.value, settings = Twinkle.block.blockPresetsInfo[value];
-	
+
 	var blockBox = $(form).find('[name=actiontype][value=block]').is(':checked');
 	var partialBox = $(form).find('[name=actiontype][value=partial]').is(':checked');
 	var templateBox = $(form).find('[name=actiontype][value=template]').is(':checked');
