@@ -50,7 +50,7 @@ Twinkle.block.callback = function twinkleblockCallback() {
 	Twinkle.block.currentBlockInfo = undefined;
 	Twinkle.block.field_block_options = {};
 	Twinkle.block.field_template_options = {};
-	
+
 	var Window = new Morebits.simpleWindow(650, 530);
 	// need to be verbose about who we're blocking
 	Window.setTitle('Blokkeer of plaats blokkeersjabloon op ' + relevantUserName);
