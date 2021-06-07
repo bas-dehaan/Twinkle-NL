@@ -860,7 +860,7 @@ Twinkle.block.blockPresetsInfo = {
 		disabletalk: true,
 		noemail: true,
 		templateName: 'blok',
-		reason: '[[Wikipedia:LSV|Langdurig structureel vandalisme]]',
+		reason: '[[Wikipedia:LSV|Langdurig structureel vandalisme]] (LTA)',
 		summary: 'Je bent voor onbepaalde tijd geblokkeerd wegens [[Wikipedia:LSV|Langdurig structureel vandalisme]]',
 		suppressArticleInSummary: true
 	},
@@ -1006,7 +1006,7 @@ Twinkle.block.blockGroups = [
 		list: [
 			{ label: 'Herhaald vandalisme', value: 'vandalisme' },
 			{ label: 'Ingelogde vandaal', value: 'ingelogde vandaal' },
-			{ label: 'Langdurig structureel vandalisme', value: 'lta' },
+			{ label: 'Langdurig structureel vandalisme (LTA)', value: 'lta' },
 			{ label: 'Ongewenste gebruikersnaam', value: 'og' },
 			{ label: 'Ongewenste gebruikersnaam - bedrijf', value: 'ogbedrijf' },
 			{ label: 'Afkoelblok (informeel)', value: 'douche' },
@@ -1470,6 +1470,7 @@ Twinkle.block.callback.issue_template = function twinkleblockCallbackIssueTempla
 	Morebits.wiki.actionCompleted.notice = 'Handelingen voltooid, overlegpagina wordt geladen...';
 
 	var wikipedia_page = new Morebits.wiki.page(userTalkPage, 'Overlegpagina bewerken');
+	wikipedia_page.setFollowRedirect(true);
 	wikipedia_page.setCallbackParameters(params);
 	wikipedia_page.load(Twinkle.block.callback.main);
 };
@@ -1480,7 +1481,13 @@ Twinkle.block.callback.getBlockNoticeWikitext = function(params) {
 		if (params.template === 'ogbedrijf') {
 			text += 'subst:';
 		}
+		if (params.template === 'og') {
+			text += 'bog}}\n{{';
+		}
 		text += params.template;
+		if (params.template === 'og') {
+			text += '|naam={{subst:PAGENAME}}';
+		}
 		if (params.article && settings.pageParam) {
 			text += '|pagina=' + params.article;
 		}
