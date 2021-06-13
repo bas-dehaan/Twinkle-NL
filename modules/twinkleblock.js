@@ -1120,21 +1120,6 @@ Twinkle.block.callback.toggle_see_alsos = function twinkleblockCallbackToggleSee
 	}
 };
 
-	/*
-Twinkle.block.dsReason = '';
-Twinkle.block.callback.toggle_ds_reason = function twinkleblockCallbackToggleDSReason() {
-	var reason = this.form.reason.value.replace(
-		new RegExp(' ?\\(\\[\\[' + Twinkle.block.dsReason + '\\]\\]\\)'), ''
-	);
-
-	Twinkle.block.dsReason = Twinkle.block.dsinfo[this.options[this.selectedIndex].label].page;
-	if (!this.value) {
-		this.form.reason.value = reason;
-	} else {
-		this.form.reason.value = reason + ' ([[' + Twinkle.block.dsReason + ']])';
-	}
-};*/
-
 Twinkle.block.callback.update_form = function twinkleblockCallbackUpdateForm(e, data) {
 	var form = e.target.form, expiry = data.expiry;
 
@@ -1456,7 +1441,7 @@ Twinkle.block.callback.evaluate = function twinkleblockCallbackEvaluate(e) {
 Twinkle.block.callback.issue_template = function twinkleblockCallbackIssueTemplate(formData) {
 	// Use wgRelevantUserName to ensure the block template goes to a single IP and not to the
 	// "talk page" of an IP range (which does not exist)
-	var userTalkPage = 'Overleg_gebruiker:' + mw.config.get('wgRelevantUserName');
+	var userTalkPage = 'Overleg_gebruiker:' + relevantUserName;
 
 	var params = $.extend(formData, {
 		messageData: Twinkle.block.blockPresetsInfo[formData.template],
