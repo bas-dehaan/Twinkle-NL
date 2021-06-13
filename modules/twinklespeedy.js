@@ -1200,10 +1200,7 @@
 		var utparams = [];
 
 		// Special cases
-		if (normalized === 'g6') {
-			utparams.key1 = 'to';
-			utparams.value1 = Morebits.pageNameNorm;
-		} else if (normalized === 'g7') {
+		if (normalized === 'g7') {
 			['url', 'url2', 'url3'].forEach(function(item, idx) {
 				if (parameters[item]) {
 					idx++;
@@ -1284,8 +1281,7 @@
 		});
 
 		var warnusertalk = form.warnusertalk.checked && normalizeds.some(function (norm, index) {
-			return Twinkle.getPref('warnUserOnSpeedyDelete').indexOf(norm) !== -1 &&
-				!(norm === 'g6' && values[index] !== 'copypaste');
+			return Twinkle.getPref('warnUserOnSpeedyDelete').indexOf(norm) !== -1;
 		});
 
 		var welcomeuser = warnusertalk && normalizeds.some(function (norm) {
@@ -1347,8 +1343,7 @@
 			return Twinkle.getPref('watchSpeedyPages').indexOf(norm) !== -1 && Twinkle.getPref('watchSpeedyExpiry');
 		});
 		var notifyuser = form.notify.checked && normalizeds.some(function(norm, index) {
-			return Twinkle.getPref('notifyUserOnSpeedyDeletionNomination').indexOf(norm) !== -1 &&
-				!(norm === 'g6' && values[index] !== 'copypaste');
+			return Twinkle.getPref('notifyUserOnSpeedyDeletionNomination').indexOf(norm) !== -1;
 		});
 		var welcomeuser = notifyuser && normalizeds.some(function(norm) {
 			return Twinkle.getPref('welcomeUserOnSpeedyDeletionNotification').indexOf(norm) !== -1;
