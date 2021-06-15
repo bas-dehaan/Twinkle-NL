@@ -943,7 +943,7 @@ Twinkle.block.blockPresetsInfo = {
 		reasonParam: false,
 		templateName: 'deelblok',
 		reason: 'Uitspraak [[WP:AC/Z|Arbitragecommissie]]',
-		summary: 'Je bent gedeeltelijk geblokkeerd naar aanleiding van een uitspraak van de [[WP:AC/Z|Arbitragecommissie]].'
+		summary: 'Je bent gedeeltelijk geblokkeerd naar aanleiding van een uitspraak van de [[WP:AC/Z|Arbitragecommissie]]'
 	},
 	'bwo-deelblok': {
 		autoblock: true,
@@ -961,7 +961,7 @@ Twinkle.block.blockPresetsInfo = {
 		nocreate: true,
 		pageParam: true,
 		reasonParam: true,
-		summary: 'Je bent gedeeltelijk geblokkeerd.'
+		summary: 'Je bent gedeeltelijk geblokkeerd'
 	}
 };
 
