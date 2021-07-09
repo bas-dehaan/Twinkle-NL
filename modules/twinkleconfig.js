@@ -805,7 +805,7 @@ Twinkle.config.init = function twinkleconfigInit() {
 			var contentnotice = document.createElement('p');
 			contentnotice.innerHTML = '<table class="plainlinks ombox ombox-content"><tr><td class="mbox-image">' +
 				'<img alt="" src="https://upload.wikimedia.org/wikipedia/commons/3/38/Imbox_content.png" /></td>' +
-				'<td class="mbox-text"><p><big><b>Voordat je verder gaat,</b> moet je eerst je oude Twinkle instellingen verwijderen uit je persoonlijke JavaScript.</big></p>' +
+				'<td class="mbox-text"><p><b>Voordat je verder gaat,</b> moet je eerst je oude Twinkle instellingen verwijderen uit je persoonlijke JavaScript.</p>' +
 				'<p>Om dit te doen, kan je <a href="' + mw.util.getUrl('User:' + mw.config.get('wgUserName') + '/' + mw.config.get('skin') +
 				'.js', { action: 'edit' }) + '" target="_blank"><b>je eigen javascript bewerken</b></a> of kun je in <a href="' +
 				mw.util.getUrl('User:' + mw.config.get('wgUserName') + '/common.js', { action: 'edit'}) + '" target="_blank"><b>je common.js bestand</b></a>, alle regels code verwijderen die naar <code>TwinkleConfig</code> verwijzen.</p>' +

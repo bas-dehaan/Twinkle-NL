@@ -697,7 +697,7 @@
 
 			if (initialContrib) {
 				var usertalkpage = new Morebits.wiki.page('Overleg gebruiker:' + initialContrib, 'Verwittig originele aanmaker (' + initialContrib + ')'),
-					notifytext, i, editsummary;
+					notifytext, editsummary;
 
 				if (params.normalizeds.indexOf('g5') === -1 && params.normalizeds.indexOf('g9') === -1) {
 					notifytext = '\n== '+ (params.warnUser ? 'Directe verwijdering' : 'Nominatie') + ' van ' + Morebits.pageNameNorm + ' ==';
@@ -852,7 +852,7 @@
 					wikipedia_api.params = params;
 					wikipedia_api.post();
 				}
-				
+
 				// promote Unlink tool
 				var $link, $bigtext;
 				if (mw.config.get('wgNamespaceNumber') === 6 && params.normalized !== 'f8') {
@@ -954,13 +954,13 @@
 					statelem.status('Controleren op bestaande nominaties...');
 
 					// check for existing deletion tags
-					var tag = /(?:\{\{\s*(nuweg|delete)(?:\s*\||\s*\}\}))/.exec(text);
+					var tag = /{{\s*(nuweg|delete)(?:\s*\||\s*}})/.exec(text);
 					// This won't make use of the db-multiple template but it probably should
 					if (tag && !confirm('De pagina heeft al een {{nuweg}} nominatie. Wil je een extra nominatie toevoegen?')) {
 						return;
 					}
 
-					var xfd = /(?:\{\{\s*(wiu|ne|wb|auteur|reclame|weg|verwijderen)(?:\s*\||\s*\}\}))/.exec(text);
+					var xfd = /{{\s*(wiu|ne|wb|auteur|reclame|weg|verwijderen)(?:\s*\||\s*}})/.exec(text);
 					if (xfd && !confirm('De pagina heeft al een {{' + xfd[1] + '}} nominatie. Weet je zeker dat je een nuweg-nominatie wil toevoegen?')) {
 						return;
 					}
@@ -1280,7 +1280,7 @@
 			}
 		});
 
-		var warnusertalk = form.warnusertalk.checked && normalizeds.some(function (norm, index) {
+		var warnusertalk = form.warnusertalk.checked && normalizeds.some(function (norm) {
 			return Twinkle.getPref('warnUserOnSpeedyDelete').indexOf(norm) !== -1;
 		});
 
@@ -1342,7 +1342,7 @@
 		var watchPage = normalizeds.some(function(norm) {
 			return Twinkle.getPref('watchSpeedyPages').indexOf(norm) !== -1 && Twinkle.getPref('watchSpeedyExpiry');
 		});
-		var notifyuser = form.notify.checked && normalizeds.some(function(norm, index) {
+		var notifyuser = form.notify.checked && normalizeds.some(function(norm) {
 			return Twinkle.getPref('notifyUserOnSpeedyDeletionNomination').indexOf(norm) !== -1;
 		});
 		var welcomeuser = notifyuser && normalizeds.some(function(norm) {

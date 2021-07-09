@@ -285,7 +285,6 @@ Twinkle.unlink.callbacks = {
 				warningString = warningString ? 'bestandsgebruik en links' : 'links';
 			} else {
 				summaryText = (summaryText ? summaryText + ' / ' : '') + 'Verwijderen van link(s) naar';
-				oldtext = text;
 			}
 		}
 

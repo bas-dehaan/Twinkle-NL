@@ -692,7 +692,7 @@ Twinkle.tag.callbacks = {
 	article: function articleCallback(pageobj) {
 
 		// Remove tags that become superfluous with this action
-		var pageText = pageobj.getPageText().replace(/\{\{\s*([Uu]serspace draft)\s*(\|(?:\{\{[^{}]*\}\}|[^{}])*)?\}\}\s*/g, '');
+		var pageText = pageobj.getPageText().replace(/{{\s*([Uu]serspace draft)\s*(\|(?:{{[^{}]*}}|[^{}])*)?}}\s*/g, '');
 		var params = pageobj.getCallbackParameters();
 
 		/**
@@ -733,7 +733,7 @@ Twinkle.tag.callbacks = {
 
 			// avoid truncated summaries
 			if (summaryText.length > 499) {
-				summaryText = summaryText.replace(/\[\[[^|]+\|([^\]]+)\]\]/g, '$1');
+				summaryText = summaryText.replace(/\[\[[^|]+\|([^\]]+)]]/g, '$1');
 			}
 
 			pageobj.setPageText(pageText);
@@ -752,7 +752,7 @@ Twinkle.tag.callbacks = {
 					mergeTalkPage.setPageSection(2);
 					mergeTalkPage.setFollowRedirect(true);
 
-					var text = mergeTalkPage.getPageText();
+					mergeTalkPage.getPageText();
 					mergeTalkPage.getStatusElement().status('Samenvoeg-discussie opslaan...');
 					mergeTalkPage.setEditSummary('Voorstel: Samenvoegen van ' + params.talkDiscussionTitleLinked);
 					mergeTalkPage.setAppendText('* ' + params.talkDiscussionTitleLinked + ' - ' + params.mergeReason.trim() + ' - ~~~~');
@@ -926,9 +926,8 @@ Twinkle.tag.callbacks = {
 								params.primaryArticle = tagName === 'Samenvoegennaar' ? params.mergeTarget : mw.config.get('wgTitle');
 								params.secondaryArticle = tagName === 'Samenvoegennaar' ? mw.config.get('wgTitle') : params.mergeTarget;
 
-								var direction = '[[' + params.secondaryArticle + ']]' + (params.mergeTag === 'Samenvoegen' ? ' met ' : ' naar ') + '[[' + params.primaryArticle + ']]';
-								params.talkDiscussionTitleLinked = direction;
-								params.talkDiscussionTitle = params.talkDiscussionTitleLinked.replace(/\[\[(.*?)\]\]/g, '$1');
+								params.talkDiscussionTitleLinked = '[[' + params.secondaryArticle + ']]' + (params.mergeTag === 'Samenvoegen' ? ' met ' : ' naar ') + '[[' + params.primaryArticle + ']]';
+								params.talkDiscussionTitle = params.talkDiscussionTitleLinked.replace(/[[(.*?)]]/g, '$1');
 							}
 						}
 						break;
@@ -999,7 +998,7 @@ Twinkle.tag.callbacks = {
 			}
 		});
 
-		var miTest = /\{\{(multiple ?issues|article ?issues|mi)(?!\s*\|\s*section\s*=)[^}]+\{/im.exec(pageText);
+		var miTest = /{{(multiple ?issues|article ?issues|mi)(?!\s*\|\s*section\s*=)[^}]+{/im.exec(pageText);
 
 		if (miTest && groupableTags.length > 0) {
 			Morebits.status.info('Info', 'Adding supported tags inside existing {{multiple issues}} tag');
@@ -1099,7 +1098,7 @@ Twinkle.tag.callback.evaluate = function friendlytagCallbackEvaluate(e) {
 	// Given an array of incompatible tags, check if we have two or more selected
 	var checkIncompatible = function(conflicts, extra) {
 		var count = conflicts.reduce(function(sum, tag) {
-			return sum += params.tags.indexOf(tag) !== -1;
+			return sum + params.tags.indexOf(tag) !== -1;
 		}, 0);
 		if (count > 1) {
 			var message = 'Selecteer slechts één: {{' + conflicts.join('}}, {{') + '}}.';

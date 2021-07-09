@@ -262,6 +262,7 @@ Twinkle.arv.callback.evaluate = function(e) {
 	var uid = form.uid.value;
 
 	var types;
+	var aivPage
 	switch (form.category.value) {
 
 		// WP:REGBLOK
@@ -312,15 +313,12 @@ Twinkle.arv.callback.evaluate = function(e) {
 			Morebits.wiki.actionCompleted.redirect = 'Wikipedia:Verzoekpagina voor moderatoren/RegBlok';
 			Morebits.wiki.actionCompleted.notice = 'Rapporteren voltooid';
 
-			var aivPage = new Morebits.wiki.page('Wikipedia:Verzoekpagina voor moderatoren/RegBlok', 'Regblok verzoek verwerken');
+			aivPage = new Morebits.wiki.page('Wikipedia:Verzoekpagina voor moderatoren/RegBlok', 'Regblok verzoek verwerken');
 			aivPage.setPageSection(2); //Geteld vanaf boven
 			aivPage.setFollowRedirect(true);
 
 			aivPage.load(function() {
-				var text = aivPage.getPageText();
-				var $aivLink = '<a target="_blank" href="/wiki/Wikipedia:Verzoekpagina voor moderatoren/RegBlok">WP:Regblok</a>';
-
-				// make the report
+				aivPage.getPageText();
 				aivPage.getStatusElement().status('Gebruiker rapporteren...');
 				aivPage.setEditSummary('Blokverzoek voor [[Overleg gebruiker:' + uid + ']].');
 				aivPage.setChangeTags(Twinkle.changeTags);
@@ -374,15 +372,12 @@ Twinkle.arv.callback.evaluate = function(e) {
 			Morebits.wiki.actionCompleted.redirect = 'Wikipedia:Verzoekpagina voor moderatoren/IPBlok';
 			Morebits.wiki.actionCompleted.notice = 'Rapporteren voltooid';
 
-			var aivPage = new Morebits.wiki.page('Wikipedia:Verzoekpagina voor moderatoren/IPBlok', 'IPBlok verzoek verwerken');
+			aivPage = new Morebits.wiki.page('Wikipedia:Verzoekpagina voor moderatoren/IPBlok', 'IPBlok verzoek verwerken');
 			aivPage.setPageSection(2); //Geteld vanaf boven
 			aivPage.setFollowRedirect(true);
 
 			aivPage.load(function() {
-				var text = aivPage.getPageText();
-				var $aivLink = '<a target="_blank" href="/wiki/Wikipedia:Verzoekpagina voor moderatoren/IPBlok">WP:IPBlok</a>';
-
-				// make the report
+				aivPage.getPageText();
 				aivPage.getStatusElement().status('Gebruiker rapporteren...');
 				aivPage.setEditSummary('Blokverzoek voor [[Overleg gebruiker:' + uid + ']].');
 				aivPage.setChangeTags(Twinkle.changeTags);
@@ -483,9 +478,7 @@ Twinkle.arv.processSock = function(params) {
 	spiPage.setFollowRedirect(true);
 
 	spiPage.load(function() {
-		var text = spiPage.getPageText();
-		var $spiLink = '<a target="_blank" href="/wiki/Wikipedia:Verzoekpagina voor moderatoren/Sokpoppen">WP:Sokpop</a>';
-
+		spiPage.getPageText();
 		spiPage.getStatusElement().status('Gebruiker rapporteren...');
 		spiPage.setEditSummary('Checkuser verzoek voor [[Overleg gebruiker:' + params.uid + ']].');
 		spiPage.setChangeTags(Twinkle.changeTags);

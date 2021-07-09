@@ -218,11 +218,11 @@ Twinkle.getPref = function twinkleGetPref(name) {
  *  "mw_contentwrapper" (top nav), outer nav class "portlet", inner div class "pBody". Existing portlets or elements: "p-cactions", "mw_content"
  *  "mw_portlets" (sidebar), outer nav class "portlet", inner div class "pBody". Existing portlets: "p-navigation", "p-search", "p-interaction", "p-tb", "p-coll-print_export"
  *
- * @param String navigation -- id of the target navigation area (skin dependant, on vector either of "left-navigation", "right-navigation", or "mw-panel")
- * @param String id -- id of the portlet menu to create, preferably start with "p-".
- * @param String text -- name of the portlet menu to create. Visibility depends on the class used.
- * @param String type -- type of portlet. Currently only used for the vector non-sidebar portlets, pass "menu" to make this portlet a drop down menu.
- * @param Node nextnodeid -- the id of the node before which the new item should be added, should be another item in the same list, or undefined to place it at the end.
+ * @param navigation -- id of the target navigation area (skin dependant, on vector either of "left-navigation", "right-navigation", or "mw-panel")
+ * @param id -- id of the portlet menu to create, preferably start with "p-".
+ * @param text -- name of the portlet menu to create. Visibility depends on the class used.
+ * @param type -- type of portlet. Currently only used for the vector non-sidebar portlets, pass "menu" to make this portlet a drop down menu.
+ * @param nextnodeid -- the id of the node before which the new item should be added, should be another item in the same list, or undefined to place it at the end.
  *
  * @return Node -- the DOM node of the new item (a DIV element) or null
  */
@@ -345,6 +345,9 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
  * **************** Twinkle.addPortletLink() ****************
  * Builds a portlet menu if it doesn't exist yet, and add the portlet link.
  * @param task: Either a URL for the portlet link or a function to execute.
+ * @param text:
+ * @param id:
+ * @param tooltip:
  */
 Twinkle.addPortletLink = function(task, text, id, tooltip) {
 	if (Twinkle.getPref('portletArea') !== null) {
@@ -388,11 +391,11 @@ $.ajax({
 		}
 
 		// Twinkle options are basically a JSON object with some comments. Strip those:
-		optionsText = optionsText.replace(/(?:^(?:\/\/[^\n]*\n)*\n*|(?:\/\/[^\n]*(?:\n|$))*$)/g, '');
+		optionsText = optionsText.replace(/^(?:\/\/[^\n]*\n)*\n*|(?:\/\/[^\n]*(?:\n|$))*$/g, '');
 
 		// First version of options had some boilerplate code to make it eval-able -- strip that too. This part may become obsolete down the line.
 		if (optionsText.lastIndexOf('window.Twinkle.prefs = ', 0) === 0) {
-			optionsText = optionsText.replace(/(?:^window.Twinkle.prefs = |;\n*$)/g, '');
+			optionsText = optionsText.replace(/^window.Twinkle.prefs = |;\n*$/g, '');
 		}
 
 		try {

@@ -963,15 +963,7 @@ Twinkle.protect.callback.changePreset = function twinkleprotectCallbackChangePre
 Twinkle.protect.callback.evaluate = function twinkleprotectCallbackEvaluate(e) {
 	var form = e.target;
 	var input = Morebits.quickForm.getInputData(form);
-
-	var tagparams;
 	if (input.actiontype === 'tag' || (input.actiontype === 'protect' && mw.config.get('wgArticleId') && mw.config.get('wgPageContentModel') !== 'Scribunto')) {
-		tagparams = {
-			tag: input.tagtype,
-			reason: (input.tagtype === 'full-agemeen' || input.tagtype === 'semi-algemeen' || input.tagtype === 'move-algemeen') && input.protectReason,
-			small: input.small,
-			noinclude: input.noinclude
-		};
 	}
 
 	switch (input.actiontype) {
@@ -1289,7 +1281,6 @@ Twinkle.protect.callbacks = {
 
 		// If either protection type results in a increased status, then post it under increase
 		// else we post it under decrease
-		var increase = false;
 		var protInfo = Twinkle.protect.protectionPresetsInfo[params.category];
 
 		// function to compute protection weights (see comment at Twinkle.protect.protectionWeight)
@@ -1317,7 +1308,6 @@ Twinkle.protect.callbacks = {
 			Twinkle.protect.currentProtectionLevels.move.level) ||
 			computeWeight(protInfo.create) > computeWeight(Twinkle.protect.currentProtectionLevels.create &&
 			Twinkle.protect.currentProtectionLevels.create.level)) {
-			increase = true;
 		}
 
 		var reg = /(\n=\s*Behandelde verzoeken\s*=)/;
