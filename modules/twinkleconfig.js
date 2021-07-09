@@ -1,6 +1,6 @@
 // <nowiki>
 
-/*****************************************************************************************************
+/** ***************************************************************************************************
  * WARNING: This file is synced with a GitHub-repo. Please make any changes to this file over there. *
  * Any local changes might be overwritten the next time this file is updated.                        *
  *                                                                                                   *
@@ -8,7 +8,7 @@
  * Locale bewerkingen worden mogelijk overschreven bij de volgende update.                           *
  *                                                                                                   *
  * https://github.com/NLWikiTools/Twinkle/blob/master/modules/twinkleconfig.js                       *
- *****************************************************************************************************/
+ **************************************************************************************************** */
 
 (function($) {
 
@@ -34,7 +34,7 @@ Twinkle.config = {};
 
 Twinkle.config.watchlistEnums = {
 	'yes': 'Voeg toe aan volglijst (permanent)',
-	'no': "Voeg niet toe aan volglijst",
+	'no': 'Voeg niet toe aan volglijst',
 	'default': 'Volg site voorkeuren',
 	'1 week': 'Volg 1 week',
 	'1 month': 'Volg 1 maand',
@@ -66,7 +66,7 @@ Twinkle.config.commonSets = {
 	csdCriteriaDelete: {
 		g1: 'Leeg halen', g2: 'Onzin', g3: 'Machinevertaling', g4: 'Zelfpromotie', g5: 'Cyberpesten',
 		g6: 'Reclame', g7: 'Copyvio', g8: 'Duplicaat', g9: 'Privacyschending', g10: 'Enige auteur',
-		u1: 'Eigen naamruimte',  u2: 'Misbruik gebruikersnaamruimte', s1: 'TBx afhandeling', s2: 'Verplaatsing'
+		u1: 'Eigen naamruimte', u2: 'Misbruik gebruikersnaamruimte', s1: 'TBx afhandeling', s2: 'Verplaatsing'
 	},
 	csdCriteriaDeleteDisplayOrder: [
 		'g1', 'g2', 'g3', 'g4', 'g5',
@@ -278,8 +278,8 @@ Twinkle.config.sections = [
 			//
 			{
 				name: 'rollbackInPlace',
-				label: "Herlaad de pagina niet bij terugdraaiing vanuit Recente Wijzigingen of Gebruikers Bijdragen",
-				helptip: "Als dit aan staat zal Twinkle de pagina niet herladen waardoor je meerdere terugdraaiingen achter elkaar kan uitvoeren.",
+				label: 'Herlaad de pagina niet bij terugdraaiing vanuit Recente Wijzigingen of Gebruikers Bijdragen',
+				helptip: 'Als dit aan staat zal Twinkle de pagina niet herladen waardoor je meerdere terugdraaiingen achter elkaar kan uitvoeren.',
 				type: 'boolean'
 			},
 
@@ -334,7 +334,7 @@ Twinkle.config.sections = [
 			}
 		]
 	},
-/* Module komt later
+	/* Module komt later
 	{
 		title: 'Gedeeld IP-labeling',
 		module: 'shared',
@@ -527,11 +527,11 @@ Twinkle.config.sections = [
 			{
 				name: 'customTagList',
 				label: 'Aangepaste onderhoudssjablonen',
-				helptip: "Deze worden weergegeven als extra sjablonen onder aan de lijst. Hiermee kun je nieuwe sjablonen toevoegen die (nog) niet zijn opgenomen in Twinkle.",
+				helptip: 'Deze worden weergegeven als extra sjablonen onder aan de lijst. Hiermee kun je nieuwe sjablonen toevoegen die (nog) niet zijn opgenomen in Twinkle.',
 				type: 'customList',
 				customListValueTitle: 'Sjabloonnaam (zonder accolades)',
 				customListLabelTitle: 'Label zoals weer te geven in het overzicht'
-			},
+			}
 		]
 	},
 
@@ -568,12 +568,12 @@ Twinkle.config.sections = [
 					3: 'Niveau 3 - Waarschuwing',
 					4: 'Niveau 4 - Laatste waarschuwing',
 					5: 'Niveau E - Enige waarschuwing',
-					//6: 'Single-issue notices', (n.v.t. op nlwiki)
-					//7: 'Single-issue warnings', (n.v.t. op nlwiki)
+					// 6: 'Single-issue notices', (n.v.t. op nlwiki)
+					// 7: 'Single-issue warnings', (n.v.t. op nlwiki)
 					// 8 was used for block templates before #260
 					9: 'Aangepaste waarschuwingen',
 					10: 'Alle waarschuwingssjablonen'
-					//11: 'Automatisch niveau (1-4)' (werkt nog niet)
+					// 11: 'Automatisch niveau (1-4)' (werkt nog niet)
 				}
 			},
 
@@ -655,7 +655,7 @@ Twinkle.config.sections = [
 			{
 				name: 'customWelcomeList',
 				label: 'Aangepaste welkomssjablonen om te weergeven',
-				helptip: "Je kan overige, of zelfgemaakte, welkomssjablonen toevoegen om te gebruiken in Twinkle.",
+				helptip: 'Je kan overige, of zelfgemaakte, welkomssjablonen toevoegen om te gebruiken in Twinkle.',
 				type: 'customList',
 				customListValueTitle: 'Sjabloonpaginanaam (zonder accolades)',
 				customListLabelTitle: 'Naam zoals weer te geven in lijst'

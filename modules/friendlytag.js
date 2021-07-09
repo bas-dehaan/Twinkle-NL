@@ -446,7 +446,7 @@ var getMergeSubgroups = function(tag) {
 // excludeMI: true indicate a tag that *does not* work inside {{multiple issues}}
 // Add new categories with discretion - the list is long enough as is!
 Twinkle.tag.article.tagList = {
-	'Onderhoudslabels': {
+	Onderhoudslabels: {
 		'Veel gebruikt': [
 			{
 				tag: 'Beginnetje',
@@ -655,12 +655,12 @@ Twinkle.tag.article.tagList = {
 						}
 					]
 			},
-			{ tag: 'Wereldwijd', description: "Het artikel geeft geen wereldwijd standpunt" },
+			{ tag: 'Wereldwijd', description: 'Het artikel geeft geen wereldwijd standpunt' },
 			{ tag: 'BeschrijftNederlands', description: 'Het artikel beschrijft enkel de situatie in Nederland' },
 			{ tag: 'BeschrijftNederlandBelgië', description: 'Het artikel beschrijft enkel de situatie in Nederland en België' }
 		]
 	},
-	'Samenvoegen': [
+	Samenvoegen: [
 		{ tag: 'Samenvoegen', description: 'Dit artikel zou samengevoegd moeten worden met een ander artikel',
 			subgroup: getMergeSubgroups('Samenvoegen') },
 		{ tag: 'Samenvoegenvan', description: 'Een ander artikel zou moeten worden ingevoegd bij dit artikel',
@@ -668,7 +668,7 @@ Twinkle.tag.article.tagList = {
 		{ tag: 'Samenvoegennaar', description: 'Dit artikel zou moeten worden ingevoegd bij een ander artikel',
 			subgroup: getMergeSubgroups('Samenvoegennaar') }
 	],
-	'Overig': [
+	Overig: [
 		{
 			tag: 'Meebezig',
 			description: 'Aan dit artikel wordt op dit moment gewerkt',
@@ -809,7 +809,8 @@ Twinkle.tag.callbacks = {
 			// otherwise moves it to `getRedirectsFor` array earmarking it for
 			// later removal
 			params.tagsToRemove.forEach(function removeTag(tag) {
-				var tag_re = new RegExp('\{\{' + Morebits.pageNameRegex(tag) + '\s*(\|[^}]+)?\}\}\n?');
+				// eslint-disable-next-line no-useless-escape
+				var tag_re = new RegExp('{{' + Morebits.pageNameRegex(tag) + '\s*(\|[^}]+)?}}\n?');
 
 				if (tag_re.test(pageText)) {
 					pageText = pageText.replace(tag_re, '');
@@ -841,7 +842,8 @@ Twinkle.tag.callbacks = {
 					var removed = false;
 					page.linkshere.forEach(function(el) {
 						var tag = el.title.slice(9);
-						var tag_re = new RegExp('\{\{' + Morebits.pageNameRegex(tag) + '\s*(\|[^}]*)?\}\}\n?');
+						// eslint-disable-next-line no-useless-escape
+						var tag_re = new RegExp('{{' + Morebits.pageNameRegex(tag) + '\s*(\|[^}]*)?}}\n?');
 						if (tag_re.test(pageText)) {
 							pageText = pageText.replace(tag_re, '');
 							removed = true;
@@ -880,7 +882,7 @@ Twinkle.tag.callbacks = {
 
 			// Place {{Beginnetje}} at the bottom of the page.
 			if (tagName === 'Beginnetje') {
-				pageText += '\n\n{{' + tagName
+				pageText += '\n\n{{' + tagName;
 				var subgroupObj2 = Twinkle.tag.article.flatObject[tagName] &&
 					Twinkle.tag.article.flatObject[tagName].subgroup;
 				if (subgroupObj2) {
@@ -966,7 +968,8 @@ Twinkle.tag.callbacks = {
 
 		// Separate tags into groupable ones (`groupableTags`) and non-groupable ones (`tags`)
 		params.tags.forEach(function(tag) {
-			tagRe = new RegExp('\{\{' + tag + '(\||\}\})', 'im');
+			// eslint-disable-next-line no-useless-escape
+			tagRe = new RegExp('{{' + tag + '(\||}})', 'im');
 			// regex check for preexistence of tag can be skipped if in canRemove mode
 			if (Twinkle.tag.canRemove || !tagRe.exec(pageText)) {
 				// condition Twinkle.tag.article.tags[tag] to ensure that its not a custom tag
@@ -1006,7 +1009,8 @@ Twinkle.tag.callbacks = {
 			tagText = '';
 			$.each(groupableTags, addTag);
 
-			var miRegex = new RegExp('(\{\{\s*' + miTest[1] + '\s*(?:\|(?:\{\{[^{}]*\}\}|[^{}])*)?)\}\}\s*', 'im');
+			// eslint-disable-next-line no-useless-escape
+			var miRegex = new RegExp('({{\s*' + miTest[1] + '\s*(?:\|(?:{{[^{}]*}}|[^{}])*)?)}}\s*', 'im');
 			pageText = pageText.replace(miRegex, '$1' + tagText + '}}\n');
 			tagText = '';
 
@@ -1033,7 +1037,8 @@ Twinkle.tag.callbacks = {
 			// Reposition the tags on the page into {{multiple issues}}, if found with its
 			// proper name, else moves it to `getRedirectsFor` array to be handled later
 			groupableExistingTags.forEach(function repositionTagIntoMI(tag) {
-				var tag_re = new RegExp('(\{\{' + Morebits.pageNameRegex(tag) + '\s*(\|[^}]+)?\}\}\n?)');
+				// eslint-disable-next-line no-useless-escape
+				var tag_re = new RegExp('({{' + Morebits.pageNameRegex(tag) + '\s*(\|[^}]+)?}}\n?)');
 				if (tag_re.test(pageText)) {
 					tagText += tag_re.exec(pageText)[1];
 					pageText = pageText.replace(tag_re, '');
@@ -1064,7 +1069,8 @@ Twinkle.tag.callbacks = {
 					var found = false;
 					page.linkshere.forEach(function(el) {
 						var tag = el.title.slice(9);
-						var tag_re = new RegExp('(\{\{' + Morebits.pageNameRegex(tag) + '\s*(\|[^}]*)?\}\}\n?)');
+						// eslint-disable-next-line no-useless-escape
+						var tag_re = new RegExp('({{' + Morebits.pageNameRegex(tag) + '\s*(\|[^}]*)?}}\n?)');
 						if (tag_re.test(pageText)) {
 							tagText += tag_re.exec(pageText)[1];
 							pageText = pageText.replace(tag_re, '');

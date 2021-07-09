@@ -1,6 +1,6 @@
 // <nowiki>
 
-/*****************************************************************************************************
+/** ***************************************************************************************************
  * WARNING: This file is synced with a GitHub-repo. Please make any changes to this file over there. *
  * Any local changes might be overwritten the next time this file is updated.                        *
  *                                                                                                   *
@@ -8,7 +8,7 @@
  * Locale bewerkingen worden mogelijk overschreven bij de volgende update.                           *
  *                                                                                                   *
  * https://github.com/NLWikiTools/Twinkle/blob/master/modules/twinklearv.js                          *
- *****************************************************************************************************/
+ **************************************************************************************************** */
 
 (function($) {
 
@@ -35,7 +35,7 @@ Twinkle.arv = function twinklearv() {
 
 	Twinkle.addPortletLink(function() {
 		Twinkle.arv.callback(username, isIP);
-	}, 'Rapporteer', 'tw-arv', 'Rapporteer ' + userType );
+	}, 'Rapporteer', 'tw-arv', 'Rapporteer ' + userType);
 };
 
 Twinkle.arv.callback = function (uid, isIP) {
@@ -106,7 +106,7 @@ Twinkle.arv.callback = function (uid, isIP) {
 	} else {
 		query.bkusers = uid;
 	}
-	new Morebits.wiki.api("Controleren of gebruiker geblokeerd is ", query, function(apiobj) {
+	new Morebits.wiki.api('Controleren of gebruiker geblokeerd is ', query, function(apiobj) {
 		var blocklist = apiobj.getResponse().query.blocks;
 		if (blocklist.length) {
 			// If an IP is blocked *and* rangeblocked, only use whichever is more recent
@@ -157,11 +157,11 @@ Twinkle.arv.callback.changeCategory = function (e) {
 					},
 					{
 						label: 'Crosswiki vandaal',
-						value: 'crosswiki',
+						value: 'crosswiki'
 					},
 					{
 						label: 'Ongewenste gebruikersnaam',
-						value: 'og',
+						value: 'og'
 					},
 					{
 						label: 'Spambot',
@@ -198,7 +198,7 @@ Twinkle.arv.callback.changeCategory = function (e) {
 					},
 					{
 						label: 'Crosswiki vandaal',
-						value: 'crosswiki',
+						value: 'crosswiki'
 					},
 					{
 						label: 'Spambot',
@@ -228,7 +228,7 @@ Twinkle.arv.callback.changeCategory = function (e) {
 					label: 'Sokpoppen',
 					sublabel: 'Sokpop: ',
 					tooltip: 'De gebruikersnaam van de sokpop zonder de "Gebruiker:" prefix. Meer dan 3 sokken? Doe het verzoek dan handmatig op WP:SOKPOP.',
-					max: 3 //Limiteer o.b.v. beperking Sjabloon:Aanvraagcheckuser
+					max: 3 // Limiteer o.b.v. beperking Sjabloon:Aanvraagcheckuser
 				});
 			work_area.append({
 				type: 'textarea',
@@ -262,7 +262,7 @@ Twinkle.arv.callback.evaluate = function(e) {
 	var uid = form.uid.value;
 
 	var types;
-	var aivPage
+	var aivPage;
 	switch (form.category.value) {
 
 		// WP:REGBLOK
@@ -314,7 +314,7 @@ Twinkle.arv.callback.evaluate = function(e) {
 			Morebits.wiki.actionCompleted.notice = 'Rapporteren voltooid';
 
 			aivPage = new Morebits.wiki.page('Wikipedia:Verzoekpagina voor moderatoren/RegBlok', 'Regblok verzoek verwerken');
-			aivPage.setPageSection(2); //Geteld vanaf boven
+			aivPage.setPageSection(2); // Geteld vanaf boven
 			aivPage.setFollowRedirect(true);
 
 			aivPage.load(function() {
@@ -328,7 +328,7 @@ Twinkle.arv.callback.evaluate = function(e) {
 			});
 			break;
 
-		//WP:IPBLOK
+		// WP:IPBLOK
 		case 'ipblok':
 			types = form.getChecked('arvtype');
 			if (!types.length && comment === '') {
@@ -373,7 +373,7 @@ Twinkle.arv.callback.evaluate = function(e) {
 			Morebits.wiki.actionCompleted.notice = 'Rapporteren voltooid';
 
 			aivPage = new Morebits.wiki.page('Wikipedia:Verzoekpagina voor moderatoren/IPBlok', 'IPBlok verzoek verwerken');
-			aivPage.setPageSection(2); //Geteld vanaf boven
+			aivPage.setPageSection(2); // Geteld vanaf boven
 			aivPage.setFollowRedirect(true);
 
 			aivPage.load(function() {
@@ -395,7 +395,7 @@ Twinkle.arv.callback.evaluate = function(e) {
 				notify: form.notify.checked
 			};
 
-			var puppetReport = false; //TODO deze bodge wegwerken
+			var puppetReport = false; // TODO deze bodge wegwerken
 
 			sockParameters.uid = uid;
 			sockParameters.sockpuppets = puppetReport ? [uid] : Morebits.array.uniq($.map($('input:text[name=sockpuppet]', form), function(o) {
@@ -474,7 +474,7 @@ Twinkle.arv.processSock = function(params) {
 	Morebits.wiki.actionCompleted.notice = 'Rapporteren succesvol';
 
 	var spiPage = new Morebits.wiki.page('Wikipedia:Verzoekpagina voor moderatoren/Sokpoppen', 'Verzoekpagina ophalen');
-	spiPage.setPageSection(2); //Geteld vanaf boven
+	spiPage.setPageSection(2); // Geteld vanaf boven
 	spiPage.setFollowRedirect(true);
 
 	spiPage.load(function() {

@@ -1,6 +1,6 @@
 // <nowiki>
 
-/*****************************************************************************************************
+/** ***************************************************************************************************
  * WARNING: This file is synced with a GitHub-repo. Please make any changes to this file over there. *
  * Any local changes might be overwritten the next time this file is updated.                        *
  *                                                                                                   *
@@ -8,7 +8,7 @@
  * Locale bewerkingen worden mogelijk overschreven bij de volgende update.                           *
  *                                                                                                   *
  * https://github.com/NLWikiTools/Twinkle/blob/master/modules/twinklebatchprotect.js                 *
- *****************************************************************************************************/
+ **************************************************************************************************** */
 
 (function($) {
 
@@ -279,7 +279,7 @@ Twinkle.batchprotect.callback.evaluate = function twinklebatchprotectCallbackEva
 	var input = Morebits.quickForm.getInputData(form);
 
 	if (!input.reason) {
-		alert("Geen reden opgegeven (Mr. Twinkly mompelt iets met sysops en luiheid).");
+		alert('Geen reden opgegeven (Mr. Twinkly mompelt iets met sysops en luiheid).');
 		return;
 	}
 

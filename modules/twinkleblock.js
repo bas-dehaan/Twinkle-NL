@@ -1,6 +1,6 @@
 // <nowiki>
 
-/*****************************************************************************************************
+/** ***************************************************************************************************
  * WARNING: This file is synced with a GitHub-repo. Please make any changes to this file over there. *
  * Any local changes might be overwritten the next time this file is updated.                        *
  *                                                                                                   *
@@ -8,7 +8,7 @@
  * Locale bewerkingen worden mogelijk overschreven bij de volgende update.                           *
  *                                                                                                   *
  * https://github.com/NLWikiTools/Twinkle/blob/master/modules/twinkleblock.js                        *
- *****************************************************************************************************/
+ **************************************************************************************************** */
 
 (function($) {
 
@@ -34,11 +34,11 @@ Twinkle.block = function twinkleblock() {
 };
 
 Twinkle.block.callback = function twinkleblockCallback() {
-	if (relevantUserName === 'Bas dehaan'){ //don't fight me with my own weapon
-		alert('Uw zoekopdracht \"Blokkeer Bas_dehaan\" gaf geen resultaten. Bedoelde u \"WP:DESYSOP#' + mw.config.get('wgUserName') + '\"?');
+	if (relevantUserName === 'Bas dehaan') { // don't fight me with my own weapon
+		alert('Uw zoekopdracht "Blokkeer Bas_dehaan" gaf geen resultaten. Bedoelde u "WP:DESYSOP#"' + mw.config.get('wgUserName') + '"?');
 		return;
 	}
-	if (relevantUserName === 'Daniuu'){ //don't fight me with the weapon I helped creating
+	if (relevantUserName === 'Daniuu') { // don't fight me with the weapon I helped creating
 		alert('Op de zevende dag schiep den here Twinkle. Hij verdoemde de persoon die dit gadget tegen zijn scheppers wou gebruiken, en zag dat het goed was.');
 		return;
 	}
@@ -402,7 +402,7 @@ Twinkle.block.callback.change_action = function twinkleblockCallbackChangeAction
 			type: 'input',
 			name: 'expiry',
 			label: 'Aangepaste tijd',
-			tooltip: 'Je kunt relatieve tijd gebruiken (in het Engels), zoals "1 minute" of "19 days", of absolute tijden in "jjjjmmdduumm"-format (bijv. "199905210155" is 21 mei 1999 om 01:55 UTC).', //dit is wel heel speciefiek ;)
+			tooltip: 'Je kunt relatieve tijd gebruiken (in het Engels), zoals "1 minute" of "19 days", of absolute tijden in "jjjjmmdduumm"-format (bijv. "199905210155" is 21 mei 1999 om 01:55 UTC).', // dit is wel heel speciefiek ;)
 			value: Twinkle.block.field_block_options.expiry || Twinkle.block.field_template_options.template_expiry
 		});
 
@@ -494,7 +494,7 @@ Twinkle.block.callback.change_action = function twinkleblockCallbackChangeAction
 			name: 'filerlog_label',
 			label: 'Zie ook:',
 			style: 'display:inline-block;font-style:normal !important',
-			tooltip: 'Voeg een \"zie ook\" bericht toe voor de onderdelen die hebben megewogen bij de blokkade.'
+			tooltip: 'Voeg een "zie ook" bericht toe voor de onderdelen die hebben megewogen bij de blokkade.'
 		});
 		field_block_options.append({
 			type: 'checkbox',
@@ -570,7 +570,7 @@ Twinkle.block.callback.change_action = function twinkleblockCallbackChangeAction
 			type: 'input',
 			name: 'block_reason',
 			label: '"Je bent geblokkeerd wegens ..." ',
-			tooltip: 'Een optionele reden, welke mogelijk in het sjabloon geplaatst wordt. Ter vervanging van de standaard \"Je bent geblokkeerd\".',
+			tooltip: 'Een optionele reden, welke mogelijk in het sjabloon geplaatst wordt. Ter vervanging van de standaard "Je bent geblokkeerd".',
 			value: Twinkle.block.field_template_options.block_reason
 		});
 
@@ -582,7 +582,7 @@ Twinkle.block.callback.change_action = function twinkleblockCallbackChangeAction
 					{
 						label: 'Blokkadeduur niet toevoegen aan sjabloon',
 						checked: Twinkle.block.field_template_options.blank_duration,
-						tooltip: 'Hierdoor zal de tekst sjabloon worden vervangen met \"tijdelijk geblokkeerd\".'
+						tooltip: 'Hierdoor zal de tekst sjabloon worden vervangen met "tijdelijk geblokkeerd".'
 					}
 				]
 			});
@@ -593,17 +593,17 @@ Twinkle.block.callback.change_action = function twinkleblockCallbackChangeAction
 					{
 						label: 'Overlegpagina geblokkeerd',
 						name: 'notalk',
-						checked: Twinkle.block.field_template_options.notalk,
+						checked: Twinkle.block.field_template_options.notalk
 					},
 					{
 						label: 'E-mailfunctie geblokkeerd',
 						name: 'noemail_template',
-						checked: Twinkle.block.field_template_options.noemail_template,
+						checked: Twinkle.block.field_template_options.noemail_template
 					},
 					{
 						label: 'Account aanmaken geblokkeerd',
 						name: 'nocreate_template',
-						checked: Twinkle.block.field_template_options.nocreate_template,
+						checked: Twinkle.block.field_template_options.nocreate_template
 					}
 				]
 			});
@@ -618,6 +618,7 @@ Twinkle.block.callback.change_action = function twinkleblockCallbackChangeAction
 		field_template_options.append({ type: 'div', id: 'twinkleblock-previewbox', style: 'display: none' });
 	} else if (field_preset) {
 		// Only visible for arbitration enforcement, toggled in change_preset
+		// eslint-disable-next-line no-undef
 		field_preset.append(dsSelectSettings);
 	}
 
@@ -1000,7 +1001,7 @@ Twinkle.block.blockGroups = [
 		label: 'Aangepaste redenen',
 		list: [
 			{ label: 'Standaard blokkade', value: 'blok', selected: true },
-			{ label: 'Standaard blokkade onbepaalde tijd', value: 'permblok' },
+			{ label: 'Standaard blokkade onbepaalde tijd', value: 'permblok' }
 		]
 	},
 	{
@@ -1319,7 +1320,7 @@ Twinkle.block.callback.evaluate = function twinkleblockCallbackEvaluate(e) {
 		if (!blockoptions.expiry) {
 			return alert('Geef een blokkadeduur!');
 		} else if (Morebits.string.isInfinity(blockoptions.expiry) && !Twinkle.block.isRegistered) {
-			return alert("Een IP-adres kan niet voor onbepaalde tijd geblokkeerd worden!");
+			return alert('Een IP-adres kan niet voor onbepaalde tijd geblokkeerd worden!');
 		}
 		if (!blockoptions.reason) {
 			return alert('Geef een rede voor de blokkade!');

@@ -1,6 +1,6 @@
 // <nowiki>
 
-/*****************************************************************************************************
+/** ***************************************************************************************************
  * WARNING: This file is synced with a GitHub-repo. Please make any changes to this file over there. *
  * Any local changes might be overwritten the next time this file is updated.                        *
  *                                                                                                   *
@@ -8,7 +8,7 @@
  * Locale bewerkingen worden mogelijk overschreven bij de volgende update.                           *
  *                                                                                                   *
  * https://github.com/NLWikiTools/Twinkle/blob/master/modules/twinkleprotect.js                      *
- *****************************************************************************************************/
+ **************************************************************************************************** */
 
 (function($) {
 
@@ -72,7 +72,7 @@ Twinkle.protect.callback = function twinkleprotectCallback() {
 			{
 				label: 'Plaats beveilig sjabloon (n.v.t. op nlwiki)',
 				value: 'tag',
-				disabled: true //kan vooralsnog niet weg (want JavaScript), dus voorlopig dan maar zo.
+				disabled: true // kan vooralsnog niet weg (want JavaScript), dus voorlopig dan maar zo.
 			}
 		]
 	});
@@ -99,7 +99,7 @@ Twinkle.protect.callback = function twinkleprotectCallback() {
 
 // A list of bots who may be the protecting sysop, for whom we shouldn't
 // remind the user contact before requesting unprotection (evaluate)
-Twinkle.protect.trustedBots = ['Nlwikibot']; //hier moet iets staan, dus dan maar het meest onschuldige botje
+Twinkle.protect.trustedBots = ['Nlwikibot']; // hier moet iets staan, dus dan maar het meest onschuldige botje
 
 // Customizable namespace and FlaggedRevs settings
 // In theory it'd be nice to have restrictionlevels defined here,
@@ -540,7 +540,7 @@ Twinkle.protect.callback.changeAction = function twinkleprotectCallbackChangeAct
 			});
 			break;
 		default:
-			alert("Hmmm... Daar ging iets mis (ERROR: module_protect/line_534)");
+			alert('Hmmm... Daar ging iets mis (ERROR: module_protect/line_534)');
 			break;
 	}
 
@@ -687,7 +687,7 @@ Twinkle.protect.protectionTypes = [
 			{ label: 'Veelbezochte pagina (semi)', value: 'semi-veelbezocht' },
 			{ label: 'Reclame/zelfpromotie (semi)', value: 'semi-spam' }
 		]
-	},/*
+	}, /*
 	{
 		label: 'Pending changes',
 		list: [
@@ -697,7 +697,7 @@ Twinkle.protect.protectionTypes = [
 			{ label: 'Adding unsourced content (PC)', value: 'pp-pc-unsourced' },
 			{ label: 'BLP policy violations (PC)', value: 'pp-pc-blp' }
 		]
-	},*/
+	}, */
 	{
 		label: 'Titelbeveiliging',
 		list: [
@@ -749,7 +749,7 @@ Twinkle.protect.protectionWeight = {
  * expiry: default protection duration
  * reason: defailt reason to add to pendingchange log
  * template: template to add to the page
- **/
+ * */
 Twinkle.protect.protectionPresetsInfo = {
 	'full-algemeen': {
 		edit: 'sysop',
@@ -963,8 +963,6 @@ Twinkle.protect.callback.changePreset = function twinkleprotectCallbackChangePre
 Twinkle.protect.callback.evaluate = function twinkleprotectCallbackEvaluate(e) {
 	var form = e.target;
 	var input = Morebits.quickForm.getInputData(form);
-	if (input.actiontype === 'tag' || (input.actiontype === 'protect' && mw.config.get('wgArticleId') && mw.config.get('wgPageContentModel') !== 'Scribunto')) {
-	}
 
 	switch (input.actiontype) {
 		case 'protect':
@@ -1062,7 +1060,7 @@ Twinkle.protect.callback.evaluate = function twinkleprotectCallbackEvaluate(e) {
 			} else if (input.pcmodify) {
 				stabilizeIt();
 			} else {
-				alert("Geef Twinkle iets te doen!");
+				alert('Geef Twinkle iets te doen!');
 			}
 
 			break;
@@ -1259,7 +1257,7 @@ Twinkle.protect.callbacks = {
 			statusElement.error([ 'Er is al een verzoek voor deze pagina op  ', rppLink, ', afbreken.' ]);
 			return;
 		}
-		//newtag += '* {{pagelinks|1=' + Morebits.pageNameNorm + '}}\n\n';
+		// newtag += '* {{pagelinks|1=' + Morebits.pageNameNorm + '}}\n\n';
 
 		var words;
 		switch (params.expiry) {
@@ -1278,37 +1276,6 @@ Twinkle.protect.callbacks = {
 
 		newtag += "'''" + Morebits.string.toUpperCaseFirstChar(words) + (params.reason !== '' ? ":''' " +
 			Morebits.string.formatReasonText(params.reason) : ".'''") + ' ~~~~';
-
-		// If either protection type results in a increased status, then post it under increase
-		// else we post it under decrease
-		var protInfo = Twinkle.protect.protectionPresetsInfo[params.category];
-
-		// function to compute protection weights (see comment at Twinkle.protect.protectionWeight)
-		var computeWeight = function(mainLevel, stabilizeLevel) {
-			var result = Twinkle.protect.protectionWeight[mainLevel || 'all'];
-			if (stabilizeLevel) {
-				if (result) {
-					if (stabilizeLevel.level === 'autoconfirmed') {
-						result += 2;
-					}
-				} else {
-					result = Twinkle.protect.protectionWeight['flaggedrevs_' + stabilizeLevel];
-				}
-			}
-			return result;
-		};
-
-		// compare the page's current protection weights with the protection we are requesting
-		var editWeight = computeWeight(Twinkle.protect.currentProtectionLevels.edit &&
-			Twinkle.protect.currentProtectionLevels.edit.level,
-		Twinkle.protect.currentProtectionLevels.stabilize &&
-			Twinkle.protect.currentProtectionLevels.stabilize.level);
-		if (computeWeight(protInfo.edit, protInfo.stabilize) > editWeight ||
-			computeWeight(protInfo.move) > computeWeight(Twinkle.protect.currentProtectionLevels.move &&
-			Twinkle.protect.currentProtectionLevels.move.level) ||
-			computeWeight(protInfo.create) > computeWeight(Twinkle.protect.currentProtectionLevels.create &&
-			Twinkle.protect.currentProtectionLevels.create.level)) {
-		}
 
 		var reg = /(\n=\s*Behandelde verzoeken\s*=)/;
 

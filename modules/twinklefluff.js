@@ -1,6 +1,6 @@
 // <nowiki>
 
-/*****************************************************************************************************
+/** ***************************************************************************************************
  * WARNING: This file is synced with a GitHub-repo. Please make any changes to this file over there. *
  * Any local changes might be overwritten the next time this file is updated.                        *
  *                                                                                                   *
@@ -8,7 +8,7 @@
  * Locale bewerkingen worden mogelijk overschreven bij de volgende update.                           *
  *                                                                                                   *
  * https://github.com/NLWikiTools/Twinkle/blob/master/modules/twinklefluff.js                        *
- *****************************************************************************************************/
+ **************************************************************************************************** */
 
 (function($) {
 
@@ -67,7 +67,7 @@ Twinkle.fluff = function twinklefluff() {
 // makes edits seconds after the original edit is made.  This only affects
 // vandalism rollback; for good faith rollback, it will stop, indicating a bot
 // has no faith, and for normal rollback, it will rollback that edit.
-Twinkle.fluff.trustedBots = ['nlwikibots']; //Tja, botjes met rollback hebben we (nog) niet, dus voor als nog alleen het meest onschuldige botje hier
+Twinkle.fluff.trustedBots = ['nlwikibots']; // Tja, botjes met rollback hebben we (nog) niet, dus voor als nog alleen het meest onschuldige botje hier
 Twinkle.fluff.skipTalk = null;
 Twinkle.fluff.rollbackInPlace = null;
 // String to insert when a username is hidden
@@ -478,7 +478,7 @@ Twinkle.fluff.callbacks = {
 
 		var page = response.query.pages[0];
 		if (!page.actions.edit) {
-			apiobj.statelem.error("Bewerken mislukt, pagina is waarschijnlijk beveiligd.");
+			apiobj.statelem.error('Bewerken mislukt, pagina is waarschijnlijk beveiligd.');
 			return;
 		}
 

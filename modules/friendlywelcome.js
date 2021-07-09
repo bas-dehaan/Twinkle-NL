@@ -1,6 +1,6 @@
 // <nowiki>
 
-/*****************************************************************************************************
+/** ***************************************************************************************************
  * WARNING: This file is synced with a GitHub-repo. Please make any changes to this file over there. *
  * Any local changes might be overwritten the next time this file is updated.                        *
  *                                                                                                   *
@@ -8,7 +8,7 @@
  * Locale bewerkingen worden mogelijk overschreven bij de volgende update.                           *
  *                                                                                                   *
  * https://github.com/NLWikiTools/Twinkle/blob/master/modules/friendlywelcome.js                     *
- *****************************************************************************************************/
+ **************************************************************************************************** */
 
 
 (function($) {
@@ -340,8 +340,7 @@ Twinkle.welcome.templates = {
 				syntax: '{{gpi}}'
 			}
 		}
- 	}
-
+	}
 };
 
 Twinkle.welcome.getTemplateWikitext = function(type, template, article) {

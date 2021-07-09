@@ -1,7 +1,7 @@
 // <nowiki>
 
 
-/*****************************************************************************************************
+/** ***************************************************************************************************
  * WARNING: This file is synced with a GitHub-repo. Please make any changes to this file over there. *
  * Any local changes might be overwritten the next time this file is updated.                        *
  *                                                                                                   *
@@ -9,7 +9,7 @@
  * Locale bewerkingen worden mogelijk overschreven bij de volgende update.                           *
  *                                                                                                   *
  * https://github.com/NLWikiTools/Twinkle/blob/master/modules/twinkleunlink.js                       *
- *****************************************************************************************************/
+ **************************************************************************************************** */
 
 (function($) {
 
@@ -24,7 +24,7 @@
 
 Twinkle.unlink = function twinkleunlink() {
 	if (mw.config.get('wgNamespaceNumber') < 0 || mw.config.get('wgPageName') === 'Wikipedia:Zandbak' ||
-		//Restrict to rollbacker and sysop
+		// Restrict to rollbacker and sysop
 		(!Morebits.userIsInGroup('rollbacker') && !Morebits.userIsSysop)) {
 		return;
 	}
@@ -290,7 +290,7 @@ Twinkle.unlink.callbacks = {
 
 		if (warningString) {
 			// nothing to do!
-			pageobj.getStatusElement().error("Geen " + warningString + ' op de pagina gevonden.');
+			pageobj.getStatusElement().error('Geen ' + warningString + ' op de pagina gevonden.');
 			params.unlinker.workerFailure(pageobj);
 			return;
 		}
