@@ -21,8 +21,8 @@ describe('Morebits.date', () => {
 		assert.false(new Morebits.date('no').isValid(), 'Invalid');
 
 		// Ideally we would test the differences between UTC and non-UTC dates
-		assert.strictEqual(date.getUTCDayName(), 'Saturday', 'getUTCDayName');
-		assert.strictEqual(date.getUTCDayNameAbbrev(), 'Sat', 'getUTCDayNameAbbrev');
+		assert.strictEqual(date.getUTCDayName(), 'Zaterdag', 'getUTCDayName');
+		assert.strictEqual(date.getUTCDayNameAbbrev(), 'Za', 'getUTCDayNameAbbrev');
 		assert.strictEqual(date.getUTCMonthName(), 'November', 'getUTCMonthName');
 		assert.strictEqual(date.getUTCMonthNameAbbrev(), 'Nov', 'getUTCMonthNameAbbrev');
 
@@ -60,14 +60,14 @@ describe('Morebits.date', () => {
 	});
 	test('Formats', () => {
 		assert.strictEqual(new Morebits.date(now).format('YYYY-MM-DDTHH:mm:ss.SSSZ', 'utc'), new Date(now).toISOString(), 'ISO format');
-		assert.strictEqual(date.format('dddd D MMMM YY h:mA', 'utc'), 'Saturday 7 November 20 4:26PM', 'Some weirder stuff');
+		assert.strictEqual(date.format('dddd D MMMM YY h:mA', 'utc'), 'Zaterdag 7 November 20 4:26PM', 'Some weirder stuff');
 		assert.strictEqual(date.format('MMt[h month], [d]a[y] D, h [o\'clock] A', 'utc'), '11th month, day 7, 4 o\'clock PM', 'Format escapes');
-		assert.strictEqual(date.format('dddd D MMMM YY h:mA', 600), 'Sunday 8 November 20 2:26AM', 'non-UTC formatting');
+		assert.strictEqual(date.format('dddd D MMMM YY h:mA', 600), 'Zondag 8 November 20 2:26AM', 'non-UTC formatting');
 		assert.strictEqual(date.format('MMt[h month], [d]a[y] D, h [o\'clock] A', 600), '11th month, day 8, 2 o\'clock AM', 'non-UTC escapes');
 	});
 	test('Calendar', () => {
-		assert.strictEqual(date.calendar('utc'), '2020-11-07', 'Old calendar');
-		assert.strictEqual(date.calendar(600), '2020-11-08', 'Old non-UTC');
+		assert.strictEqual(date.calendar('utc'), '07-11-2020', 'Old calendar');
+		assert.strictEqual(date.calendar(600), '08-11-2020', 'Old non-UTC');
 		assert.strictEqual(new Morebits.date(now).calendar('utc'), 'Today at ' + new Morebits.date(now).format('h:mm A', 'utc'), 'New calendar');
 		assert.strictEqual(new Morebits.date(now).subtract(1, 'day').calendar('utc'), 'Yesterday at ' + new Morebits.date(now).format('h:mm A', 'utc'), 'Close calendar');
 	});
