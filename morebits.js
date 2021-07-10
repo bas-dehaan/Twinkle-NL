@@ -1797,11 +1797,6 @@ Morebits.date = function() {
 		// Try standard date
 		this._d = new (Function.prototype.bind.apply(Date, [Date].concat(args)));
 	}
-
-	// Still no?
-	if (!this.isValid()) {
-		mw.log.warn('Invalid Morebits.date initialisation:', args);
-	}
 };
 
 /**
