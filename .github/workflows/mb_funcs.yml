@@ -1,4 +1,4 @@
-name: Morebits function tests
+name: Morebits QC
 
 on:
   push:
