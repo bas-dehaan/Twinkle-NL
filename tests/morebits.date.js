@@ -68,7 +68,7 @@ describe('Morebits.date', () => {
 	test('Calendar', () => {
 		assert.strictEqual(date.calendar('utc'), '07-11-2020', 'Old calendar');
 		assert.strictEqual(date.calendar(600), '08-11-2020', 'Old non-UTC');
-		assert.strictEqual(new Morebits.date(now).calendar('utc'), 'Today at ' + new Morebits.date(now).format('h:mm A', 'utc'), 'New calendar');
-		assert.strictEqual(new Morebits.date(now).subtract(1, 'day').calendar('utc'), 'Yesterday at ' + new Morebits.date(now).format('h:mm A', 'utc'), 'Close calendar');
+		assert.strictEqual(new Morebits.date(now).calendar('utc'), 'Vandaag om ' + new Morebits.date(now).format('hh:mm', 'utc'), 'New calendar');
+		assert.strictEqual(new Morebits.date(now).subtract(1, 'day').calendar('utc'), 'Gisteren om ' + new Morebits.date(now).format('hh:mm', 'utc'), 'Close calendar');
 	});
 });
