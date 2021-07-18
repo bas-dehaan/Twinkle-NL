@@ -234,7 +234,7 @@ Twinkle.arv.callback.changeCategory = function (e) {
 				type: 'textarea',
 				label: 'Bewijs:',
 				name: 'evidence',
-				tooltip: 'Een sokpoppen onderzoek door een checkuser is een zeer ingrijpende procedure, daarom moet het aangeleverde bewijs duidelijk maken waarom een sokpop onderzoek noodzakelijk en gerechtvaardigd is. Bedenk ook dat het hebben van een sokpop op zichzelf niet verboden is, alleen het misbruik maken van sokpoppen is verboden.',
+				tooltip: 'Een sokpoppenonderzoek door een checkuser is een zeer ingrijpende procedure, daarom moet het aangeleverde bewijs duidelijk maken waarom een sokpop onderzoek noodzakelijk en gerechtvaardigd is. Bedenk ook dat het hebben van een sokpop op zichzelf niet verboden is, alleen het misbruik maken van sokpoppen is verboden.',
 				required: true
 			});
 			work_area.append({
@@ -242,7 +242,7 @@ Twinkle.arv.callback.changeCategory = function (e) {
 				list: [ {
 					label: 'Breng gebruikers op de hoogte van het onderzoek',
 					name: 'notify',
-					tooltip: 'Het op de hoogte brengen van de gebruiker is niet verplicht, en kan in veel gevalen averechts werken. Aan de andere kant is het op de hoogte brengen wel zo beleefd, zeker als je uit gaat van goede wil. De afweging is daarom aan jou als melder.'
+					tooltip: 'Het op de hoogte brengen van de gebruiker is niet verplicht, en kan in veel gevallen averechts werken. Aan de andere kant is het op de hoogte brengen wel zo beleefd, zeker als je uit gaat van goede wil. De afweging is daarom aan jou als melder.'
 				} ]
 			});
 			work_area = work_area.render();
@@ -476,7 +476,7 @@ Twinkle.arv.processSock = function(params) {
 	spiPage.load(function() {
 		spiPage.getPageText();
 		spiPage.getStatusElement().status('Gebruiker rapporteren...');
-		spiPage.setEditSummary('Checkuser verzoek voor [[Overleg gebruiker:' + params.uid + ']].');
+		spiPage.setEditSummary('Checkuserverzoek voor [[Overleg gebruiker:' + params.uid + ']].');
 		spiPage.setChangeTags(Twinkle.changeTags);
 		spiPage.setAppendText(verzoek);
 		spiPage.setWatchlist(Twinkle.getPref('spiWatchReport'));
