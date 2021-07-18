@@ -234,7 +234,7 @@ Twinkle.arv.callback.changeCategory = function (e) {
 				type: 'textarea',
 				label: 'Bewijs:',
 				name: 'evidence',
-				tooltip: 'Een sokpoppenonderzoek door een checkuser is een zeer ingrijpende procedure, daarom moet het aangeleverde bewijs duidelijk maken waarom een sokpop onderzoek noodzakelijk en gerechtvaardigd is. Bedenk ook dat het hebben van een sokpop op zichzelf niet verboden is, alleen het misbruik maken van sokpoppen is verboden.',
+				tooltip: 'Een sokpoppenonderzoek door een checkuser is een zeer ingrijpende procedure, daarom moet het aangeleverde bewijs duidelijk maken waarom een sokpoponderzoek noodzakelijk en gerechtvaardigd is. Bedenk ook dat het hebben van een sokpop op zichzelf niet verboden is, alleen het misbruik maken van sokpoppen is verboden.',
 				required: true
 			});
 			work_area.append({
