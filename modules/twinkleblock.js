@@ -851,7 +851,7 @@ Twinkle.block.blockPresetsInfo = {
 		disabletalk: true,
 		noemail: true,
 		reason: '[[Wikipedia:Sokpopmisbruik|Sokpopmisbruik]]',
-		summary: 'Je bent voor onbepaalde tijd geblokkeerd wegens [[Wikipedia:Sokpopmisbruik|sokpopmisbruik]]',
+		summary: 'Je bent geblokkeerd wegens [[Wikipedia:Sokpopmisbruik|sokpopmisbruik]]',
 		suppressArticleInSummary: true
 	},
 	'lta': {
