@@ -227,8 +227,8 @@ Twinkle.arv.callback.changeCategory = function (e) {
 					name: 'sockpuppet',
 					label: 'Sokpoppen',
 					sublabel: 'Sokpop: ',
-					tooltip: 'De gebruikersnaam van de sokpop zonder de "Gebruiker:" prefix. Meer dan 3 sokken? Doe het verzoek dan handmatig op WP:SOKPOP.',
-					max: 3 // Limiteer o.b.v. beperking Sjabloon:Aanvraagcheckuser
+					tooltip: 'De gebruikersnaam van de sokpop zonder de "Gebruiker:" prefix. Meer dan 20 sokken? Doe het verzoek dan handmatig op WP:SOKPOP.',
+					max: 20 // Limiteer o.b.v. beperking Sjabloon:Aanvraagcheckuser (bijgewerkt naar 20 na aanpassing sjabloon op 18 juli 2021)
 				});
 			work_area.append({
 				type: 'textarea',
