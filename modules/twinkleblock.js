@@ -935,6 +935,19 @@ Twinkle.block.blockPresetsInfo = {
 		reason: 'Afkoelblok',
 		summary: 'Bij deze geef ik je even een afkoelblokje'
 	},
+	'spambot': {
+		autoblock: true,
+		expiry: 'infinity',
+		forRegisteredOnly: true,
+		nocreate: true,
+		disabletalk: true,
+		noemail: true,
+		pageParam: false,
+		reasonParam: false,
+		templateName: 'permblok',
+		reason: 'Spambot',
+		summary: 'Je bent voor onbepaalde tijd geblokkeerd, omdat je account gebruikt werd voor het plaatsen van spam.'
+	},
 
 
 	// Deelblokkades, accessed in Twinkle.block.blockGroupsPartial
