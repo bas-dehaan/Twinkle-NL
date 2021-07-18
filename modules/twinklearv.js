@@ -227,8 +227,8 @@ Twinkle.arv.callback.changeCategory = function (e) {
 					name: 'sockpuppet',
 					label: 'Sokpoppen',
 					sublabel: 'Sokpop: ',
-					tooltip: 'De gebruikersnaam van de sokpop zonder de "Gebruiker:" prefix. Meer dan 3 sokken? Doe het verzoek dan handmatig op WP:SOKPOP.',
-					max: 3 // Limiteer o.b.v. beperking Sjabloon:Aanvraagcheckuser
+					tooltip: 'De gebruikersnaam van de sokpop zonder de "Gebruiker:" prefix. Meer dan 20 sokken? Doe het verzoek dan handmatig op WP:SOKPOP.',
+					max: 20 // Limiteer o.b.v. beperking Sjabloon:Aanvraagcheckuser (bijgewerkt naar 20 na aanpassing sjabloon op 18 juli 2021)
 				});
 			work_area.append({
 				type: 'textarea',
@@ -460,12 +460,8 @@ Twinkle.arv.processSock = function(params) {
 	// Voorals nog ondersteund sjabloon:Aanvraagcheckuser max. 3 sokpoppen,
 	// worden dat er meer dan is een loop wel zo netjes.
 	var verzoek = '\n\n{{subst:Aanvraagcheckuser\n|Hoofdaccount=' + params.uid;
-	verzoek += '\n|Sokpop1=' + params.sockpuppets[0];
-	if (params.sockpuppets.length > 1) {
-		verzoek += '\n|Sokpop2=' + params.sockpuppets[1];
-	}
-	if (params.sockpuppets.length > 2) {
-		verzoek += '\n|Sokpop3=' + params.sockpuppets[2];
+	for (var sokloop = 0; sokloop < params.sockpuppets.length; ++sokloop) {
+		verzoek += '\n|Sokpop' + (sokloop + 1) + '=' + params.sockpuppets[sokloop];
 	}
 	verzoek += '\n|Motivering=' + params.evidence + ' &ndash; ';
 	verzoek += '\n}}';
