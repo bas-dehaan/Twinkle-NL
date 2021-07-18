@@ -460,12 +460,8 @@ Twinkle.arv.processSock = function(params) {
 	// Voorals nog ondersteund sjabloon:Aanvraagcheckuser max. 3 sokpoppen,
 	// worden dat er meer dan is een loop wel zo netjes.
 	var verzoek = '\n\n{{subst:Aanvraagcheckuser\n|Hoofdaccount=' + params.uid;
-	verzoek += '\n|Sokpop1=' + params.sockpuppets[0];
-	if (params.sockpuppets.length > 1) {
-		verzoek += '\n|Sokpop2=' + params.sockpuppets[1];
-	}
-	if (params.sockpuppets.length > 2) {
-		verzoek += '\n|Sokpop3=' + params.sockpuppets[2];
+	for (let i = 0; i < params.sockpuppets.length; i++) {
+		verzoek += '\n|Sokpop' + (i + 1) + '=' + params.sockpuppets[i];
 	}
 	verzoek += '\n|Motivering=' + params.evidence + ' &ndash; ';
 	verzoek += '\n}}';
