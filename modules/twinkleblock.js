@@ -1025,6 +1025,7 @@ Twinkle.block.blockGroups = [
 			{ label: 'Langdurig structureel vandalisme (LTA)', value: 'lta' },
 			{ label: 'Ongewenste gebruikersnaam', value: 'og' },
 			{ label: 'Ongewenste gebruikersnaam - bedrijf', value: 'ogbedrijf' },
+			{ label: 'Spambot', value: 'spambot' },
 			{ label: 'Afkoelblok (informeel)', value: 'douche' },
 			{ label: 'Ernstig projectverstorend gedrag', value: 'verstoring' },
 			{ label: 'Sokpopmisbruik', value: 'blokpop' },
