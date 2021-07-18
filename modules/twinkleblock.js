@@ -851,7 +851,7 @@ Twinkle.block.blockPresetsInfo = {
 		disabletalk: true,
 		noemail: true,
 		reason: '[[Wikipedia:Sokpopmisbruik|Sokpopmisbruik]]',
-		summary: 'Je bent voor onbepaalde tijd geblokkeerd wegens [[Wikipedia:Sokpopmisbruik|sokpopmisbruik]]',
+		summary: 'Je bent geblokkeerd wegens [[Wikipedia:Sokpopmisbruik|sokpopmisbruik]]',
 		suppressArticleInSummary: true
 	},
 	'lta': {
@@ -935,6 +935,19 @@ Twinkle.block.blockPresetsInfo = {
 		reason: 'Afkoelblok',
 		summary: 'Bij deze geef ik je even een afkoelblokje'
 	},
+	'spambot': {
+		autoblock: true,
+		expiry: 'infinity',
+		forRegisteredOnly: true,
+		nocreate: true,
+		disabletalk: true,
+		noemail: true,
+		pageParam: false,
+		reasonParam: false,
+		templateName: 'permblok',
+		reason: 'Spambot',
+		summary: 'Je bent voor onbepaalde tijd geblokkeerd, omdat je account gebruikt werd voor het plaatsen van spam.'
+	},
 
 
 	// Deelblokkades, accessed in Twinkle.block.blockGroupsPartial
@@ -1012,6 +1025,7 @@ Twinkle.block.blockGroups = [
 			{ label: 'Langdurig structureel vandalisme (LTA)', value: 'lta' },
 			{ label: 'Ongewenste gebruikersnaam', value: 'og' },
 			{ label: 'Ongewenste gebruikersnaam - bedrijf', value: 'ogbedrijf' },
+			{ label: 'Spambot', value: 'spambot' },
 			{ label: 'Afkoelblok (informeel)', value: 'douche' },
 			{ label: 'Ernstig projectverstorend gedrag', value: 'verstoring' },
 			{ label: 'Sokpopmisbruik', value: 'blokpop' },
