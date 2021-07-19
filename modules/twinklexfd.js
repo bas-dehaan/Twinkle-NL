@@ -349,14 +349,25 @@ Twinkle.xfd.callbacks = {
 		if (venue === 'afd') {
 			text = '\n== [[' + Morebits.pageNameNorm + ']] ==\n';
 			text += '{{tbp-links|' + Morebits.pageNameNorm + '}}\n';
-			if (params.sjabloon === 'verwijderen') {
-				text += params.reason + ' &ndash; ~~~~';
-			} else if (params.sjabloon === 'auteur') {
-				text += '\'\'\'AUT\'\'\' &ndash; ' + params.reason + ' &ndash; ~~~~';
-			} else if (params.sjabloon === 'reclame') {
-				text += '\'\'\'POV\'\'\' &ndash; ' + params.reason + ' &ndash; ~~~~';
-			} else {
-				text += '\'\'\'' + params.sjabloon.toUpperCase() + '\'\'\' &ndash; ' + params.reason + ' &ndash; ~~~~';
+			switch (params.sjabloon) {
+				case 'wiu':
+					text += '\'\'\'[[Wikipedia:Werk in uitvoering|WIU]]\'\'\' &ndash; ' + params.reason + ' &ndash; ~~~~';
+					break;
+				case 'ne':
+					text += '\'\'\'[[Wikipedia:Relevantie|NE]]\'\'\' &ndash; ' + params.reason + ' &ndash; ~~~~';
+					break;
+				case 'wb':
+					text += '\'\'\'[[Wikipedia:Woordenboekdefinitie|WB]]\'\'\' &ndash; ' + params.reason + ' &ndash; ~~~~';
+					break;
+				case 'reclame':
+					text += '\'\'\'[[Wikipedia:Neutraal standpunt|POV]]\'\'\' &ndash; ' + params.reason + ' &ndash; ~~~~';
+					break;
+				case 'auteur':
+					text += '\'\'\'[[Wikipedia:Auteursrechten|AUT]]\'\'\' &ndash; ' + params.reason + ' &ndash; ~~~~';
+					break;
+				default:
+					text += params.reason + ' &ndash; ~~~~';
+					break;
 			}
 			return text;
 		} else if (venue === 'cfd') {
