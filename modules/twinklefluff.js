@@ -49,7 +49,7 @@ Twinkle.fluff = function twinklefluff() {
 
 		if (mw.config.get('wgCanonicalSpecialPageName') === 'Contributions') {
 			Twinkle.fluff.addLinks.contributions();
-		} else if (mw.config.get('wgCanonicalSpecialPageName') === 'Recentchanges' || mw.config.get('wgCanonicalSpecialPageName') === 'Recentchangeslinked') {
+		} else if (mw.config.get('wgCanonicalSpecialPageName') === 'Recentchanges' || mw.config.get('wgCanonicalSpecialPageName') === 'Recentchangeslinked' || mw.config.get('wgCanonicalSpecialPageName') === 'Blankpage') {
 			// Reload with recent changes updates
 			// structuredChangeFilters.ui.initialized is just on load
 			mw.hook('wikipage.content').add(function(item) {
