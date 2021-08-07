@@ -1,7 +1,7 @@
-describe('Morebits.taskManager', () => {
-	test('Contruction', () => {
+describe("Morebits.taskManager", () => {
+	test("Contruction", () => {
 		var tm = new Morebits.taskManager();
-		assert.true(tm instanceof Morebits.taskManager, 'Correct instance');
+		assert.true(tm instanceof Morebits.taskManager, "Correct instance");
 	});
 
 	// Helper to generate functions as well as testing output in proper order;
@@ -9,7 +9,7 @@ describe('Morebits.taskManager', () => {
 	var data = {};
 	var generateFuncs = () => {
 		data.out = [];
-		['one', 'two', 'three', 'four'].forEach((step) => {
+		["one", "two", "three", "four"].forEach((step) => {
 			data[step] = () => {
 				data.out.push(step);
 				return jQuery.Deferred().resolve();
@@ -17,7 +17,7 @@ describe('Morebits.taskManager', () => {
 		});
 	};
 
-	test('Simple', () => {
+	test("Simple", () => {
 		generateFuncs();
 		var simple = new Morebits.taskManager();
 		simple.add(data.one, []);
@@ -25,10 +25,10 @@ describe('Morebits.taskManager', () => {
 		simple.add(data.three, [data.two]);
 		simple.add(data.four, [data.three]);
 		return simple.execute().then(() => {
-			assert.deepEqual(data.out, ['one', 'two', 'three', 'four'], 'Simple order');
+			assert.deepEqual(data.out, ["one", "two", "three", "four"], "Simple order");
 		});
 	});
-	test('Complex', () => {
+	test("Complex", () => {
 		generateFuncs();
 		var complex = new Morebits.taskManager();
 		complex.add(data.one, [data.two]);
@@ -36,7 +36,7 @@ describe('Morebits.taskManager', () => {
 		complex.add(data.three, []);
 		complex.add(data.four, [data.three]);
 		return complex.execute().then(() => {
-			assert.deepEqual(data.out, ['three', 'four', 'two', 'one'], 'Complex order');
+			assert.deepEqual(data.out, ["three", "four", "two", "one"], "Complex order");
 		});
 	});
 });

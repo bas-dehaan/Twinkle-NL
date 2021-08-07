@@ -12,16 +12,16 @@
  * - You can provide a different port by running `npm run patchtest -- 1234`
  */
 
-const fs = require('fs');
-const {execSync} = require('child_process');
+const fs = require("fs");
+const {execSync} = require("child_process");
 
-const port = isNaN(Number(process.argv[2])) ? '5500' : process.argv[2];
-const server = 'http://127.0.0.1:' + port;
+const port = isNaN(Number(process.argv[2])) ? "5500" : process.argv[2];
+const server = "http://127.0.0.1:" + port;
 
 // find the last common commit between this branch and master, and get the list
 // of files changed since that commit
 try {
-	let lastCommonCommit = execSync('git merge-base HEAD master').toString().trim();
+	let lastCommonCommit = execSync("git merge-base HEAD master").toString().trim();
 	let changedFiles = execSync(`git diff ${lastCommonCommit} --name-only`).toString().split(/\r?\n/);
 	createTestLoader(changedFiles);
 } catch (err) {
@@ -34,54 +34,54 @@ function createTestLoader(changedFiles) {
 	let importsCount = 0; // for the message written to the console in the ends
 	let importLine = function(file) {
 		if (!changedFiles.includes(file)) {
-			return '';
+			return "";
 		}
-		if (file.endsWith('.js')) {
+		if (file.endsWith(".js")) {
 			importsCount++;
-			if (file.startsWith('modules/')) {
+			if (file.startsWith("modules/")) {
 				return `mw.loader.getScript('${server}/${file}');`;
 			}
 			return `return mw.loader.getScript('${server}/${file}');`;
-		} else if (file.endsWith('.css')) {
+		} else if (file.endsWith(".css")) {
 			importsCount++;
 			return `mw.loader.load('${server}/${file}', 'text/css');`;
 		}
-		return '';
+		return "";
 	};
 
 	let jsLoaderSource = `// Wait for Twinkle gadget to load, so that we can then overwrite it
 	mw.loader.using('ext.gadget.Twinkle').then(function() {
-		${importLine('morebits.css')}
-		${importLine('morebits.js')}
+		${importLine("morebits.css")}
+		${importLine("morebits.js")}
 
 	}).then(function() {
-		${importLine('twinkle.css')}
-		${importLine('twinkle.js')}
+		${importLine("twinkle.css")}
+		${importLine("twinkle.js")}
 
 	}).then(function() {
-		${importLine('modules/friendlyshared.js')}
-		${importLine('modules/friendlytag.js')}
-		${importLine('modules/friendlytalkback.js')}
-		${importLine('modules/friendlywelcome.js')}
-		${importLine('modules/twinklearv.js')}
-		${importLine('modules/twinklebatchdelete.js')}
-		${importLine('modules/twinklebatchprotect.js')}
-		${importLine('modules/twinklebatchundelete.js')}
-		${importLine('modules/twinkleblock.js')}
-		${importLine('modules/twinkleconfig.js')}
-		${importLine('modules/twinkledeprod.js')}
-		${importLine('modules/twinklediff.js')}
-		${importLine('modules/twinklefluff.js')}
-		${importLine('modules/twinkleimage.js')}
-		${importLine('modules/twinkleprod.js')}
-		${importLine('modules/twinkleprotect.js')}
-		${importLine('modules/twinklespeedy.js')}
-		${importLine('modules/twinkleunlink.js')}
-		${importLine('modules/twinklewarn.js')}
-		${importLine('modules/twinklexfd.js')}
-	});`.replace(/^\t/mg, '').replace(/^\s*$/mg, '');
+		${importLine("modules/friendlyshared.js")}
+		${importLine("modules/friendlytag.js")}
+		${importLine("modules/friendlytalkback.js")}
+		${importLine("modules/friendlywelcome.js")}
+		${importLine("modules/twinklearv.js")}
+		${importLine("modules/twinklebatchdelete.js")}
+		${importLine("modules/twinklebatchprotect.js")}
+		${importLine("modules/twinklebatchundelete.js")}
+		${importLine("modules/twinkleblock.js")}
+		${importLine("modules/twinkleconfig.js")}
+		${importLine("modules/twinkledeprod.js")}
+		${importLine("modules/twinklediff.js")}
+		${importLine("modules/twinklefluff.js")}
+		${importLine("modules/twinkleimage.js")}
+		${importLine("modules/twinkleprod.js")}
+		${importLine("modules/twinkleprotect.js")}
+		${importLine("modules/twinklespeedy.js")}
+		${importLine("modules/twinkleunlink.js")}
+		${importLine("modules/twinklewarn.js")}
+		${importLine("modules/twinklexfd.js")}
+	});`.replace(/^\t/mg, "").replace(/^\s*$/mg, "");
 
-	fs.writeFileSync('./scripts/patch-test-loader.js', jsLoaderSource, console.log);
+	fs.writeFileSync("./scripts/patch-test-loader.js", jsLoaderSource, console.log);
 
-	console.log(`Wrote import statements for ${importsCount} modified file${importsCount > 1 ? 's' : ''} to scripts/patch-test-loader.js`);
+	console.log(`Wrote import statements for ${importsCount} modified file${importsCount > 1 ? "s" : ""} to scripts/patch-test-loader.js`);
 }

@@ -1,23 +1,58 @@
 {
 	"title": "Twinkle",
 	"name": "twinkle",
-	"private": true,
-	"repository": "wikimedia-gadgets/twinkle",
+	"version": "1.1.9",
+	"description": "Wikipedia gadget that helps with maintenance-tasks",
+	"homepage": "https://github.com/NLWikiTools/TBx-Manager",
 	"scripts": {
-	  	"start": "node scripts/dev-server.js",
+		"start": "node scripts/dev-server.js",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"patchtest": "node scripts/patch-test.js",
 		"server": "node scripts/server.js",
 		"sync": "perl scripts/sync.pl",
 		"test": "jest",
-		"deployall": "perl scripts/sync.pl --mode=deploy --all"
+		"deployall": "perl scripts/sync.pl --mode=deploy --all",
+		"deploy": "node scripts/deploy.js"
 	},
+	"author": {
+		"name": "Bas dehaan",
+		"url": "https://nl.wikipedia.org/wiki/Gebruiker:Bas_dehaan"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/NLWikiTools/Twinkle.git"
+	},
+	"license": "MIT",
 	"devDependencies": {
+		"@babel/core": "^7.9.0",
+		"@babel/plugin-proposal-class-properties": "^7.8.3",
+		"@babel/preset-env": "^7.9.0",
+		"@babel/register": "^7.9.0",
+		"babel-eslint": "^10.1.0",
+		"babelify": "^10.0.0",
+		"browserify": "^16.5.0",
+		"concat": "^1.0.3",
+		"concat-cli": "^4.0.0",
+		"core-js": "^3.8.3",
 		"eslint": "^7.25.0",
 		"eslint-plugin-es5": "^1.5.0",
-		"jest": "^26.6.3",
+		"jquery": "^3.5.1",
+		"jsdom": "^16.2.2",
+		"jshint": "^2.10.2",
+		"mediawiki-title": "^0.7.2",
+		"mocha": "^7.1.2",
+		"oojs": "^5.0.0",
+		"prompt-sync": "^4.2.0",
+		"replace-in-file": "^6.0.0",
+		"stylelint": "^13.13.1",
+		"stylelint-config-standard": "^20.0.0",
+		"terser-webpack-plugin": "^5.1.4",
+		"uglify-js": "^3.8.0",
 		"mock-mediawiki": "^1.1.0",
 		"mwn": "^0.11.0"
+	},
+	"dependencies": {
+		"minify": "^7.0.2"
 	}
 }

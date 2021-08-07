@@ -9,6 +9,8 @@ stash*.diff
 *.jsX
 .vscode/
 patch-test-loader.js
+credentials.json
+dist/
 
 # Idea
 .idea
