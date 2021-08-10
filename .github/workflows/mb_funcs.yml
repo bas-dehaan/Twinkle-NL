@@ -15,7 +15,7 @@ on:
     - 'package-lock.json'
 
 jobs:
-  lint:
+  morebitsQC:
     runs-on: ubuntu-latest
 
     steps:
