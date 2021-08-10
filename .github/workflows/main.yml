@@ -17,4 +17,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           issue: ${{ github.event.issue.number }}
-          project: 1
+          project: 3
