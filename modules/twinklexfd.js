@@ -336,7 +336,7 @@ Twinkle.xfd.callbacks = {
 			talk_page.setNewSectionText(editRequest);
 			talk_page.setCreateOption('recreate');
 			talk_page.setWatchlist(Twinkle.getPref('xfdWatchPage'));
-			talk_page.setFollowRedirect(true);  // should never be needed, but if the article is moved, we would want to follow the redirect
+			talk_page.setFollowRedirect(false);
 			talk_page.setChangeTags(Twinkle.changeTags);
 			talk_page.setCallbackParameters(params);
 			talk_page.newSection(null, function() {
@@ -539,7 +539,7 @@ Twinkle.xfd.callbacks = {
 
 			// Tagging article
 			var wikipedia_page = new Morebits.wiki.page(mw.config.get('wgPageName'), 'Nominatiesjabloon aan artikel toevoegen ');
-			wikipedia_page.setFollowRedirect(true);  // should never be needed, but if the article is moved, we would want to follow the redirect
+			wikipedia_page.setFollowRedirect(false);
 			wikipedia_page.setChangeTags(Twinkle.changeTags); // Here to apply to triage
 			wikipedia_page.setCallbackParameters(apiobj.params);
 			wikipedia_page.load(Twinkle.xfd.callbacks.afd.taggingArticle);
