@@ -1236,16 +1236,19 @@ Twinkle.protect.callback.annotateProtectReason = function twinkleprotectCallback
 Twinkle.protect.callbacks = {
 	fileRequest: function(rppPage) {
 
-		var params = rppPage.getCallbackParameters();
-		var text = rppPage.getPageText();
-		var statusElement = rppPage.getStatusElement();
+		var rppPage2 = new Morebits.wiki.page('Wikipedia:Requests for page protection/Decrease', 'Loading requests pages');
+		rppPage2.load(function() {
+			var params = rppPage.getCallbackParameters();
+			var text = rppPage.getPageText();
+			var statusElement = rppPage.getStatusElement();
+			var text2 = rppPage2.getPageText();
 
-		var rppRe = new RegExp('==\\s*(\\[\\[)?\\s*:?\\s*' + Morebits.string.escapeRegExp(Morebits.pageNameNorm) + '\\s*(\\]\\])?\\s*==', 'm');
-		var tag = rppRe.exec(text);
+			var rppRe = new RegExp('===\\s*(\\[\\[)?\\s*:?\\s*' + Morebits.string.escapeRegExp(Morebits.pageNameNorm) + '\\s*(\\]\\])?\\s*===', 'm');
+			var tag = rppRe.exec(text) || rppRe.exec(text2);
 
-		var rppLink = document.createElement('a');
-		rppLink.setAttribute('href', mw.util.getUrl(rppPage.getPageName()));
-		rppLink.appendChild(document.createTextNode(rppPage.getPageName()));
+			var rppLink = document.createElement('a');
+			rppLink.setAttribute('href', mw.util.getUrl('Wikipedia:Requests for page protection'));
+			rppLink.appendChild(document.createTextNode('Wikipedia:Requests for page protection'));
 
 		if (tag) {
 			statusElement.error([ 'Er is al een verzoek voor deze pagina op ', rppLink, ', afbreken.' ]);
@@ -1272,10 +1275,10 @@ Twinkle.protect.callbacks = {
 				break;
 		}
 
-		words += params.typename;
+			words += params.typename;
 
-		newtag += "'''" + Morebits.string.toUpperCaseFirstChar(words) + (params.reason !== '' ? ":''' " +
-			Morebits.string.formatReasonText(params.reason) : ".'''") + ' ~~~~';
+			newtag += "'''" + Morebits.string.toUpperCaseFirstChar(words) + (params.reason !== '' ? ":''' " +
+				Morebits.string.formatReasonText(params.reason) : ".'''") + ' ~~~~';
 
 		var reg = /(\n=\s*Behandelde verzoeken\s*=)/;
 
