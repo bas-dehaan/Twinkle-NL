@@ -41,7 +41,7 @@
 		"jquery": "^3.5.1",
 		"jsdom": "^17.0.0",
 		"jshint": "^2.13.1",
-		"mediawiki-title": "^0.7.2",
+		"mediawiki-title": "^0.7.4",
 		"mocha": "^9.1.1",
 		"oojs": "^6.0.0",
 		"prompt-sync": "^4.2.0",
