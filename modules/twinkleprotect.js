@@ -1249,6 +1249,7 @@ Twinkle.protect.callbacks = {
 			var rppLink = document.createElement('a');
 			rppLink.setAttribute('href', mw.util.getUrl('Wikipedia:Requests for page protection'));
 			rppLink.appendChild(document.createTextNode('Wikipedia:Requests for page protection'));
+		}
 
 		if (tag) {
 			statusElement.error([ 'Er is al een verzoek voor deze pagina op ', rppLink, ', afbreken.' ]);
