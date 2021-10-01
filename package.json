@@ -54,6 +54,6 @@
 		"mwn": "^1.11.4"
 	},
 	"dependencies": {
-		"minify": "^7.0.2"
+		"minify": "^8.0.0"
 	}
 }
