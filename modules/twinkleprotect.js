@@ -14,12 +14,12 @@
 
 
 /*
- ****************************************
- *** twinkleprotect.js: Protect/RPP module
- ****************************************
- * Mode of invocation:     Tab ("PP"/"RPP")
- * Active on:              Non-special, non-MediaWiki pages
- */
+	 ****************************************
+	 *** twinkleprotect.js: Protect/RPP module
+	 ****************************************
+	 * Mode of invocation:     Tab ("PP"/"RPP")
+	 * Active on:              Non-special, non-MediaWiki pages
+	 */
 
 // Note: a lot of code in this module is re-used/called by batchprotect.
 
@@ -110,8 +110,8 @@ Twinkle.protect.trustedBots = ['Nlwikibot']; // hier moet iets staan, dus dan ma
 // wgFlaggedRevsParams, but after 1.34-wmf4 it is no longer exported if empty
 // (https://gerrit.wikimedia.org/r/c/mediawiki/extensions/FlaggedRevs/+/508427)
 var hasFlaggedRevs = mw.loader.getState('ext.flaggedRevs.review') &&
-// FlaggedRevs only valid in some namespaces, hardcoded until [[phab:T218479]]
-(mw.config.get('wgNamespaceNumber') === 0 || mw.config.get('wgNamespaceNumber') === 4);
+		// FlaggedRevs only valid in some namespaces, hardcoded until [[phab:T218479]]
+		(mw.config.get('wgNamespaceNumber') === 0 || mw.config.get('wgNamespaceNumber') === 4);
 // Limit template editor; a Twinkle restriction, not a site setting
 var isTemplate = mw.config.get('wgNamespaceNumber') === 10 || mw.config.get('wgNamespaceNumber') === 828;
 
@@ -741,15 +741,15 @@ Twinkle.protect.protectionWeight = {
 // NOTICE: keep this synched with [[MediaWiki:Protect-dropdown]]
 // expiry will override any defaults
 /**
- * @Params
- * edit: required level to edit
- * move: required level to move
- * create: required level to create
- * stabilize: required level for pending changes
- * expiry: default protection duration
- * reason: defailt reason to add to pendingchange log
- * template: template to add to the page
- * */
+	 * @Params
+	 * edit: required level to edit
+	 * move: required level to move
+	 * create: required level to create
+	 * stabilize: required level for pending changes
+	 * expiry: default protection duration
+	 * reason: defailt reason to add to pendingchange log
+	 * template: template to add to the page
+	 * */
 Twinkle.protect.protectionPresetsInfo = {
 	'full-algemeen': {
 		edit: 'sysop',
@@ -1236,20 +1236,16 @@ Twinkle.protect.callback.annotateProtectReason = function twinkleprotectCallback
 Twinkle.protect.callbacks = {
 	fileRequest: function(rppPage) {
 
-		var rppPage2 = new Morebits.wiki.page('Wikipedia:Requests for page protection/Decrease', 'Loading requests pages');
-		rppPage2.load(function() {
-			var params = rppPage.getCallbackParameters();
-			var text = rppPage.getPageText();
-			var statusElement = rppPage.getStatusElement();
-			var text2 = rppPage2.getPageText();
+		var params = rppPage.getCallbackParameters();
+		var text = rppPage.getPageText();
+		var statusElement = rppPage.getStatusElement();
 
-			var rppRe = new RegExp('===\\s*(\\[\\[)?\\s*:?\\s*' + Morebits.string.escapeRegExp(Morebits.pageNameNorm) + '\\s*(\\]\\])?\\s*===', 'm');
-			var tag = rppRe.exec(text) || rppRe.exec(text2);
+		var rppRe = new RegExp('==\\s*(\\[\\[)?\\s*:?\\s*' + Morebits.string.escapeRegExp(Morebits.pageNameNorm) + '\\s*(\\]\\])?\\s*==', 'm');
+		var tag = rppRe.exec(text);
 
-			var rppLink = document.createElement('a');
-			rppLink.setAttribute('href', mw.util.getUrl('Wikipedia:Requests for page protection'));
-			rppLink.appendChild(document.createTextNode('Wikipedia:Requests for page protection'));
-		}
+		var rppLink = document.createElement('a');
+		rppLink.setAttribute('href', mw.util.getUrl(rppPage.getPageName()));
+		rppLink.appendChild(document.createTextNode(rppPage.getPageName()));
 
 		if (tag) {
 			statusElement.error([ 'Er is al een verzoek voor deze pagina op ', rppLink, ', afbreken.' ]);
@@ -1276,9 +1272,9 @@ Twinkle.protect.callbacks = {
 				break;
 		}
 
-			words += params.typename;
+		words += params.typename;
 
-			newtag += "'''" + Morebits.string.toUpperCaseFirstChar(words) + (params.reason !== '' ? ":''' " +
+		newtag += "'''" + Morebits.string.toUpperCaseFirstChar(words) + (params.reason !== '' ? ":''' " +
 				Morebits.string.formatReasonText(params.reason) : ".'''") + ' ~~~~';
 
 		var reg = /(\n=\s*Behandelde verzoeken\s*=)/;
@@ -1294,7 +1290,7 @@ Twinkle.protect.callbacks = {
 		}
 		statusElement.status('Nieuw verzoek toevoegen...');
 		rppPage.setEditSummary('/* ' + Morebits.pageNameNorm + ' */ Verzoek om ' + params.typename + (params.typename === 'pending changes' ? ' op [[:' : ' van [[:') +
-			Morebits.pageNameNorm + ']].');
+				Morebits.pageNameNorm + ']].');
 		rppPage.setChangeTags(Twinkle.changeTags);
 		rppPage.setPageText(text);
 		rppPage.setCreateOption('recreate');
@@ -1311,7 +1307,7 @@ Twinkle.protect.callbacks = {
 					titles: mw.config.get('wgPageName'),
 					token: mw.user.tokens.get('watchToken')
 				};
-				// Only add the expiry if page is unwatched or already temporarily watched
+					// Only add the expiry if page is unwatched or already temporarily watched
 				if (Twinkle.protect.watched !== true && watchPref !== 'default' && watchPref !== 'yes') {
 					watch_query.expiry = watchPref;
 				}
