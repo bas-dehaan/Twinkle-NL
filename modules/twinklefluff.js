@@ -511,7 +511,7 @@ Twinkle.fluff.callbacks = {
 		var lastuser = top.user;
 
 		if (lastrevid < params.revid) {
-			Morebits.status.error('Error', [ 'Het meest recente versienummer ontvangen van de server, ', Morebits.htmlNode('strong', lastrevid), ', is lager dan het versienummer van de weergeven versie. Dit kan betekenen dat de huidige versie is verwijderd, de server achterloopt, of dat onjuiste data ontvangen is. Terugdraaiing afgebroken.' ]);
+			Morebits.status.error('Error', [ 'Het meest recente versienummer ontvangen van de server, ', Morebits.htmlNode('strong', lastrevid), ', is lager dan het versienummer van de weergegeven versie. Dit kan betekenen dat de huidige versie is verwijderd, de server achterloopt, of dat onjuiste data ontvangen is. Terugdraaiing afgebroken.' ]);
 			return;
 		}
 
@@ -634,9 +634,9 @@ Twinkle.fluff.callbacks = {
 			/* falls through */
 			default:
 				if (Twinkle.getPref('offerReasonOnNormalRevert')) {
-					extra_summary = prompt('Een optionele bewerkinssamenvatting:                              ', '');  // padded out to widen prompt in Firefox
+					extra_summary = prompt('Een optionele bewerkingssamenvatting:                              ', '');  // padded out to widen prompt in Firefox
 					if (extra_summary === null) {
-						statelem.error('Afgebroken door gerbuiker.');
+						statelem.error('Afgebroken door gebruiker.');
 						return;
 					}
 					userHasAlreadyConfirmedAction = true;
@@ -769,7 +769,7 @@ Twinkle.fluff.callbacks = {
 					comment: 'Bewerking automatisch controleren' + Twinkle.summaryAd // until the below
 					// 'tags': Twinkle.changeTags // flaggedrevs tag support: [[phab:T247721]]
 				};
-				var wikipedia_api = new Morebits.wiki.api('Bewerkingen markeren als gecontroleers', query);
+				var wikipedia_api = new Morebits.wiki.api('Bewerkingen markeren als gecontroleerd', query);
 				wikipedia_api.post();
 			}
 		}
