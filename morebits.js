@@ -5740,7 +5740,7 @@ Morebits.taskManager = function(context) {
 	 *
 	 * @memberof Morebits
 	 * @class
-	 * @requires jquery.ui.dialog
+	 * @requires jquery.ui
 	 * @param {number} width
 	 * @param {number} height - The maximum allowable height for the content area.
 	 */

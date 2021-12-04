@@ -61,7 +61,7 @@ const message = prompt("> Bewerkingssamenvatting (optioneel): ");
 const title = require("../package.json").title;
 const version = require("../package.json").version;
 const sha = execSync("git rev-parse --short HEAD").toString("utf8").trim();
-const editSummary = `${title} bijgewerkt naar versie ${version} (${sha}): ${message || "Bijwerken vanaf GitHub"}`;
+const editSummary = `${title} bijgewerkt naar versie ${version} (build: ${sha}): ${message || "Bijwerken vanaf GitHub"}`;
 console.log(`Bewerkingssamenvatting is: "${editSummary}"`);
 
 const deployments = [
@@ -77,7 +77,7 @@ const deployments = [
 	/* Twinkle Modules */
 	//{file: "modules/friendlyshared.js", target: "MediaWiki:Gadget-friendlyshared.js"},
 	{file: "modules/friendlytag.js", target: "MediaWiki:Gadget-friendlytag.js"},
-	{file: "modules/friendlywelcome.js", target: "MediaWiki:Gadget-friendlwelcome.js"},
+	{file: "modules/friendlywelcome.js", target: "MediaWiki:Gadget-friendlywelcome.js"},
 	{file: "modules/twinklearv.js", target: "MediaWiki:Gadget-twinklearv.js"},
 	{file: "modules/twinklebatchdelete.js", target: "MediaWiki:Gadget-twinklebatchdelete.js"},
 	{file: "modules/twinklebatchprotect.js", target: "MediaWiki:Gadget-twinklebatchprotect.js"},

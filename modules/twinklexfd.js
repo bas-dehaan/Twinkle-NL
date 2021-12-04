@@ -133,6 +133,12 @@ Twinkle.xfd.callback = function twinklexfdCallback() {
 	});
 
 	form.append({
+		type: 'field',
+		label: 'Work area',
+		name: 'work_area'
+	});
+
+	form.append({
 		type: 'checkbox',
 		list: [
 			{
@@ -143,11 +149,6 @@ Twinkle.xfd.callback = function twinklexfdCallback() {
 				checked: true
 			}
 		]
-	});
-	form.append({
-		type: 'field',
-		label: 'Work area',
-		name: 'work_area'
 	});
 
 	var previewlink = document.createElement('a');
