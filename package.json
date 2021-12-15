@@ -62,7 +62,7 @@
 		"replace-in-file": "^6.3.2",
 		"stylelint": "^14.0.1",
 		"stylelint-config-standard": "^23.0.0",
-		"terser-webpack-plugin": "^5.2.4",
+		"terser-webpack-plugin": "^5.2.5",
 		"uglify-js": "^3.14.3",
 		"css-minify": "^1.1.0",
 		"uglifyjs-folder": "^3.0.0",
