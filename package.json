@@ -42,7 +42,7 @@
 		"@babel/core": "^7.16.0",
 		"@babel/plugin-proposal-class-properties": "^7.16.0",
 		"@babel/preset-env": "^7.16.5",
-		"@babel/register": "^7.16.0",
+		"@babel/register": "^7.16.9",
 		"babel-eslint": "^10.1.0",
 		"babelify": "^10.0.0",
 		"browserify": "^17.0.0",
