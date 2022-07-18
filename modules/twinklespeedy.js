@@ -551,18 +551,18 @@ Twinkle.speedy.generalList = [
 				label: 'Nominatiepagina: ',
 				list: [
 					{
-						value: 'TBP',
+						value: "Te beoordelen pagina's",
 						type: 'option',
 						label: 'Te Beoordelen Pagina',
 						selected: true
 					},
 					{
-						value: 'TBS',
+						value: 'Te beoordelen sjablonen',
 						type: 'option',
 						label: 'Te Beoordelen Sjabloon'
 					},
 					{
-						value: 'TBC',
+						value: 'Te beoordelen categorieën',
 						type: 'option',
 						label: 'Te Beoordelen Categorie'
 					}
@@ -771,7 +771,7 @@ Twinkle.speedy.callbacks = {
 				});
 			} else {
 				if (params.normalizeds.indexOf('s1') !== -1) { // TBx afhandeling
-					reason = 'Per beoordelingssessie [[WP:' + params.templateParams[0]['1'] + '/Toegevoegd ' + params.templateParams[0]['2'] + '#' + Morebits.pageNameNorm + ']]';
+					reason = 'Per beoordelingssessie [[Wikipedia:' + params.templateParams[0]['1'] + '/Toegevoegd ' + params.templateParams[0]['2'] + '#' + Morebits.pageNameNorm + ']]';
 				} else if (params.normalizeds.indexOf('g7') !== -1 && typeof params.templateParams[0].url !== 'undefined') { // only if copyvio and copyvio URL was given
 					reason = 'Direct verwijderd wegens [[Wikipedia:Auteursrechten|auteursrechtenschending]] van';
 					// eslint-disable-next-line guard-for-in
