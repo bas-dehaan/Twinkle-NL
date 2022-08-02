@@ -970,7 +970,7 @@ Twinkle.warn.callbacks = {
 			if (messageData.heading) { // create new section
 				pageobj.setNewSectionTitle(messageData.heading);
 			} else {
-				Morebits.status.info('Info', 'Overlegpagina wordt aangemaakt omdat geen bestaande overlegpagina is gevonden');
+				Morebits.status.info('Info', 'Overlegkop wordt aangemaakt omdat er voor deze maand nog geen dossier is gevonden');
 				pageobj.setNewSectionTitle(now.monthHeader());
 			}
 			pageobj.setNewSectionText(warningText);

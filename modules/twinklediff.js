@@ -28,7 +28,7 @@ Twinkle.diff = function twinklediff() {
 	Twinkle.addPortletLink(mw.util.getUrl(mw.config.get('wgPageName'), {diff: 'huidig', oldid: 'vorige'}), 'Laatste', 'tw-lastdiff', 'Toon meest recente wijz');
 
 	// Show additional tabs only on diff pages
-	if (mw.util.getParamValue('diff')) {
+	if (mw.config.get('wgDiffNewId')) {
 		Twinkle.addPortletLink(function() {
 			Twinkle.diff.evaluate(false);
 		}, 'Sinds', 'tw-since', 'Toon verschillen tussen de huidige versie en de versie van de vorige gebruiker');
@@ -36,8 +36,7 @@ Twinkle.diff = function twinklediff() {
 			Twinkle.diff.evaluate(true);
 		}, 'Sinds mijn', 'tw-sincemine', 'Toon verschillen de huidige versie en mijn laatste bewerking');
 
-		var oldid = /oldid=(.+)/.exec($('#mw-diff-ntitle1').find('strong a').first().attr('href'))[1];
-		Twinkle.addPortletLink(mw.util.getUrl(mw.config.get('wgPageName'), {diff: 'cur', oldid: oldid}), 'Huidige', 'tw-curdiff', 'Toon verschil met huidige versie');
+		Twinkle.addPortletLink(mw.util.getUrl(mw.config.get('wgPageName'), {diff: 'cur', oldid: mw.config.get('wgDiffNewId')}), 'Huidige', 'tw-curdiff', 'Toon verschil met huidige versie');
 	}
 };
 
