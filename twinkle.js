@@ -292,8 +292,9 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 	h3.id = id + '-label';
 	var ul = document.createElement('ul');
 
-	if (skin === 'vector') {
+	if (skin === 'vector' || skin === 'vector-2022') {
 		ul.className = 'vector-menu-content-list';
+		h3.className = 'vector-menu-heading';
 
 		// add invisible checkbox to keep menu open when clicked
 		// similar to the p-cactions ("More") menu
