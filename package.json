@@ -56,7 +56,7 @@
 		"jsdom": "^19.0.0",
 		"jshint": "^2.13.4",
 		"mediawiki-title": "^0.7.4",
-		"mocha": "^9.1.3",
+		"mocha": "^10.0.0",
 		"oojs": "^6.0.0",
 		"prompt-sync": "^4.2.0",
 		"replace-in-file": "^6.3.2",
