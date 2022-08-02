@@ -70,7 +70,7 @@
 		"mwn": "^1.11.4"
 	},
 	"dependencies": {
-		"minify": "^8.0.3",
+		"minify": "^9.1.0",
 		"uglifyjs": "^2.4.11"
 	}
 }
