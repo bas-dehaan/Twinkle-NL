@@ -692,7 +692,7 @@ Twinkle.tag.callbacks = {
 	article: function articleCallback(pageobj) {
 
 		// Remove tags that become superfluous with this action
-		var pageText = pageobj.getPageText().replace(/{{\s*([Uu]serspace draft)\s*(\|(?:{{[^{}]*}}|[^{}])*)?}}\s*/g, '');
+		var pageText = pageobj.getPageText().replace(/\{\{\s*([Uu]serspace draft)\s*(\|(?:\{\{[^{}]*\}\}|[^{}])*)?\}\}\s*/g, '');
 		var params = pageobj.getCallbackParameters();
 
 		/**

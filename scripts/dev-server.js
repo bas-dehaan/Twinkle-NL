@@ -18,14 +18,19 @@ const server = http.createServer(async (request, response) => {
 	const cssFiles = ["morebits.css", "twinkle.css"];
 
 	let jsCode = "mw.loader.load(['jquery.ui', 'ext.gadget.select2']);";
+
+	if (process.argv[2] !== '--no-sysop') {
+		// Pretend to be a sysop, if not one already - enables testing of sysop modules by non-sysops
+		jsCode += `if (mw.config.get('wgUserGroups').indexOf('sysop') === -1) mw.config.get('wgUserGroups').push('sysop');`;
+	}
 	for (let file of jsFiles) {
 		jsCode += await readFile(file);
 	}
 	for (let file of cssFiles) {
 		let css = (await readFile(file)).replace(/\s+/g, " ");
-		jsCode += `;mw.loader.addStyleTag('${css}');`;
+		css = JSON.stringify(css); // escape double quotes and backslashes
+		jsCode += `;mw.loader.addStyleTag(${css});`;
 	}
-
 	jsCode += `;console.log('Loaded debug version of Twinkle.');`;
 	response.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8' });
 	response.end(jsCode, 'utf-8');
@@ -62,17 +67,17 @@ server.listen(port, hostname, async () => {
 		}
 		return;
 	}
-	await user.saveOption("gadget-" + GADGET_NAME, "0");
-	console.log("[i] Disabled twinkle as gadget.");
+	await user.saveOption('gadget-' + GADGET_NAME, '0');
+	console.log('[i] Disabled twinkle as gadget.');
 
 	// Allow async operations in exit hook
 	process.stdin.resume();
 
 	// Catch ^C
-	process.on("SIGINT", async () => {
+	process.on('SIGINT', async () => {
 		try {
-			await user.saveOption("gadget-" + GADGET_NAME, "1");
-			console.log("[i] Re-enabled twinkle as gadget.");
+			await user.saveOption('gadget-' + GADGET_NAME, '1');
+			console.log('[i] Re-enabled twinkle as gadget.');
 		} catch (e) {
 			console.log(`[i] failed to re-enable twinkle gadget: ${e}`);
 			console.log(e.stack);
