@@ -28,20 +28,21 @@ Twinkle.protect = function twinkleprotect() {
 		return;
 	}
 
-	Twinkle.addPortletLink(Twinkle.protect.callback, 'Beveilig', 'tw-rpp', Morebits.userIsSysop ? 'Beveilig pagina' : 'Verzoek pagina beveiliging');
+	Twinkle.addPortletLink(Twinkle.protect.callback, 'Beveilig', 'tw-rpp', Morebits.userIsSysop ? 'Beveilig pagina' : 'Verzoek paginabeveiliging');
 };
 
 Twinkle.protect.callback = function twinkleprotectCallback() {
 	var Window = new Morebits.simpleWindow(620, 530);
-	Window.setTitle(Morebits.userIsSysop ? 'Plaats of verzoek een paginabeveiliging' : 'Verzoek een paginabeveiliging');
+	Window.setTitle(Morebits.userIsSysop ? 'Paginabeveiliging toepassen of aanvragen' : 'Paginabeveiliging aanvragen');
 	Window.setScriptName('Twinkle');
-	Window.addFooterLink('Beveilig beleid', 'WP:RVM#Een_pagina_beveiligen');
-	Window.addFooterLink('Twinkle help', 'WP:TW/DOC#protect');
+	Window.addFooterLink('Informatie over beveiligingen', 'Help:Beveiligde pagina\'s');
+	Window.addFooterLink('Beveiligbeleid', 'WP:RVM#Een pagina beveiligen');
+	Window.addFooterLink('Twinkle-handleiding', 'WP:TW/DOC'); // er is geen sectie #protect
 
 	var form = new Morebits.quickForm(Twinkle.protect.callback.evaluate);
 	var actionfield = form.append({
 		type: 'field',
-		label: 'Type handeling'
+		label: 'Actie'
 	});
 	if (Morebits.userIsSysop) {
 		actionfield.append({
@@ -66,11 +67,11 @@ Twinkle.protect.callback = function twinkleprotectCallback() {
 			{
 				label: 'Verzoek om beveiliging van pagina',
 				value: 'request',
-				tooltip: 'Indien je beveiliging wil aanvragen via WP:BV' + (Morebits.userIsSysop ? ' inplaats van het zelf beveiligen.' : '.'),
+				tooltip: 'Indien je beveiliging wil aanvragen via WP:BV' + (Morebits.userIsSysop ? ' in plaats van zelf te beveiligen.' : '.'),
 				checked: !Morebits.userIsSysop
 			},
 			{
-				label: 'Plaats beveilig sjabloon (n.v.t. op nlwiki)',
+				label: 'Plaats beveiligsjabloon (n.v.t. op nlwiki)',
 				value: 'tag',
 				disabled: true // kan vooralsnog niet weg (want JavaScript), dus voorlopig dan maar zo.
 			}
@@ -277,7 +278,7 @@ Twinkle.protect.callback.showLogAndCurrentProtectInfo = function twinkleprotectC
 
 		Morebits.status.init($('div[name="hasprotectlog"] span')[0]);
 		Morebits.status.warn(
-			currentlyProtected ? 'Voorgaande beveiligingen' : 'Deze pagina is in het verleden beveiligd',
+			currentlyProtected ? 'Vorige beveiligingen' : 'Deze pagina is in het verleden beveiligd geweest',
 			$linkMarkup[0]
 		);
 	}
@@ -290,7 +291,7 @@ Twinkle.protect.callback.showLogAndCurrentProtectInfo = function twinkleprotectC
 			var label = type === 'stabilize' ? 'Pending Changes' : Morebits.string.toUpperCaseFirstChar(type);
 
 			if (type === 'cascading') { // Covered by another page
-				label = 'Cascade beveiliging ';
+				label = 'Cascadebeveiliging ';
 				protectionNode.push($('<b>' + label + '</b>')[0]);
 				if (settings.source) { // Should by definition exist
 					var sourceLink = '<a target="_blank" href="' + mw.util.getUrl(settings.source) + '">' + settings.source + '</a>';
@@ -311,7 +312,7 @@ Twinkle.protect.callback.showLogAndCurrentProtectInfo = function twinkleprotectC
 				protectionNode.push(' (verloopt ' + new Morebits.date(settings.expiry).calendar('utc') + ' (utc)) ');
 			}
 			if (settings.admin) {
-				var adminLink = '<a target="_blank" href="' + mw.util.getUrl('Overleg_gebruiker:' + settings.admin) + '">' + settings.admin + '</a>';
+				var adminLink = '<a target="_blank" href="' + mw.util.getUrl('Overleg gebruiker:' + settings.admin) + '">' + settings.admin + '</a>';
 				protectionNode.push($('<span>by ' + adminLink + '</span>')[0]);
 			}
 			protectionNode.push($('<span> \u2022 </span>')[0]);
@@ -351,9 +352,9 @@ Twinkle.protect.callback.changeAction = function twinkleprotectCallbackChangeAct
 					event: Twinkle.protect.formevents.editmodify,
 					list: [
 						{
-							label: 'Verander bewerk beveiliging',
+							label: 'Verander bewerkbeveiliging',
 							name: 'editmodify',
-							tooltip: 'Indien uitgeschakeld, zal het bewerk-beveiligingsniveau en verlooptijd ongewijzigd blijven.',
+							tooltip: 'Indien uitgeschakeld, zullen het bewerkbeveiligingsniveau en de verlooptijd ongewijzigd blijven.',
 							checked: true
 						}
 					]
@@ -361,7 +362,7 @@ Twinkle.protect.callback.changeAction = function twinkleprotectCallbackChangeAct
 				field2.append({
 					type: 'select',
 					name: 'editlevel',
-					label: 'Bewerk beveiliging:',
+					label: 'Bewerkbeveiliging:',
 					event: Twinkle.protect.formevents.editlevel,
 					list: Twinkle.protect.protectionLevels.filter(function(level) {
 						// Filter TE outside of templates and modules
@@ -387,7 +388,7 @@ Twinkle.protect.callback.changeAction = function twinkleprotectCallbackChangeAct
 						{
 							label: 'Verander titelbeveiliging',
 							name: 'movemodify',
-							tooltip: 'Indien uitgeschakeld, zal het titel-beveiligingsniveau en verlooptijd ongewijzigd blijven.',
+							tooltip: 'Indien uitgeschakeld, zullen het titelbeveiligingsniveau en de verlooptijd ongewijzigd blijven.',
 							checked: true
 						}
 					]
@@ -454,7 +455,7 @@ Twinkle.protect.callback.changeAction = function twinkleprotectCallbackChangeAct
 				field2.append({
 					type: 'select',
 					name: 'createlevel',
-					label: 'Aanmaak beveiliging:',
+					label: 'Aanmaakbeveiliging:',
 					event: Twinkle.protect.formevents.createlevel,
 					list: Twinkle.protect.protectionLevels.filter(function(level) {
 						// Filter TE always
@@ -482,9 +483,9 @@ Twinkle.protect.callback.changeAction = function twinkleprotectCallbackChangeAct
 			field2.append({
 				type: 'div',
 				name: 'protectReason_notes',
-				label: 'Note:',
+				label: 'Opmerkingen:',
 				style: 'display:inline-block; margin-top:4px;',
-				tooltip: 'Voeg een notitie toe dat de beveiliging is aangevraagd op WP:BV.'
+				tooltip: 'Voeg een opmerking toe dat de beveiliging is aangevraagd op WP:BV.'
 			});
 			field2.append({
 				type: 'checkbox',
@@ -492,7 +493,7 @@ Twinkle.protect.callback.changeAction = function twinkleprotectCallbackChangeAct
 				style: 'display:inline-block; margin-top:4px;',
 				list: [
 					{
-						label: 'WP:BV verzoek',
+						label: 'WP:BV-verzoek',
 						name: 'protectReason_notes_rfpp',
 						checked: false,
 						value: 'aangevraagd op [[WP:BV]]'
@@ -502,20 +503,20 @@ Twinkle.protect.callback.changeAction = function twinkleprotectCallbackChangeAct
 			field2.append({
 				type: 'input',
 				event: Twinkle.protect.callback.annotateProtectReason,
-				label: 'WP:BV oldid (optioneel)',
+				label: 'WP:BV-revisienummer (optioneel)',
 				name: 'protectReason_notes_rfppRevid',
 				value: '',
-				tooltip: 'Optioneel: Verwijs naar de aanvraag middels de oldid waarin de aanvraag is gedaan.'
+				tooltip: 'Optioneel: Het revisienummer (oldid) van WP:BV waar de aanvraag is gedaan.'
 			});
 
 			break;
 
 		case 'request':
-			field_preset = new Morebits.quickForm.element({ type: 'field', label: 'Type of protection', name: 'field_preset' });
+			field_preset = new Morebits.quickForm.element({ type: 'field', label: 'Soort beveiliging', name: 'field_preset' });
 			field_preset.append({
 				type: 'select',
 				name: 'category',
-				label: 'Type en reden:',
+				label: 'Soort en reden:',
 				event: Twinkle.protect.callback.changePreset,
 				list: mw.config.get('wgArticleId') ? Twinkle.protect.protectionTypes : Twinkle.protect.protectionTypesCreate
 			});
@@ -526,7 +527,7 @@ Twinkle.protect.callback.changeAction = function twinkleprotectCallbackChangeAct
 			field1.append({
 				type: 'select',
 				name: 'expiry',
-				label: 'Duur: ',
+				label: 'Duur:',
 				list: [
 					{ label: '', selected: true, value: '' },
 					{ label: 'Tijdelijk', value: 'temporary' },
@@ -536,7 +537,7 @@ Twinkle.protect.callback.changeAction = function twinkleprotectCallbackChangeAct
 			field1.append({
 				type: 'textarea',
 				name: 'reason',
-				label: 'Reden: '
+				label: 'Reden:'
 			});
 			break;
 		default:
@@ -623,7 +624,7 @@ Twinkle.protect.formevents = {
 };
 
 Twinkle.protect.doCustomExpiry = function twinkleprotectDoCustomExpiry(target) {
-	var custom = prompt('Voer aangepaste beveiliging in.  \nJe kunt relative tijden in het engels gebruiken, zoals "1 minute" en "19 days", of absolute tijden in "yyyymmddhhmm"-format (bijv: "199905210105" is 21 mei 1999 om 01:05 UTC).', '');
+	var custom = prompt('Voer aangepaste beveiliging in.  \nJe kunt relatieve tijden in het Engels gebruiken, zoals "1 minute" of "19 days", of absolute tijden in "yyyymmddhhmm"-formaat (bijv. "199905210105" is 21 mei 1999 om 01:05 UTC).', '');
 	if (custom) {
 		var option = document.createElement('option');
 		option.setAttribute('value', custom);
@@ -681,7 +682,7 @@ Twinkle.protect.protectionTypes = [
 		list: [
 			{ label: 'Algemeen (semi)', value: 'semi-algemeen' },
 			{ label: 'Herhaald vandalisme (semi)', selected: true, value: 'semi-vandalisme' },
-			{ label: 'BLP schendingen (semi)', value: 'semi-blp' },
+			{ label: 'BLP-schendingen (semi)', value: 'semi-blp' },
 			{ label: 'Sokpopperij (semi)', value: 'semi-sokpop' },
 			{ label: 'Recente gebeurtenissen (semi)', value: 'semi-recent' },
 			{ label: 'Veelbezochte pagina (semi)', value: 'semi-veelbezocht' },
@@ -715,7 +716,7 @@ Twinkle.protect.protectionTypes = [
 Twinkle.protect.protectionTypesCreate = [
 	{ label: 'Beveiliging opheffen', value: 'unprotect' },
 	{
-		label: 'Aanmaak beveiliging',
+		label: 'Aanmaakbeveiliging',
 		list: [
 			{ label: 'Algemeen (aanmaak)', value: 'aanmaak-algemeen' },
 			{ label: 'Ongewenste titel (aanmaak)', value: 'aanmaak-titel' },
@@ -990,7 +991,7 @@ Twinkle.protect.callback.evaluate = function twinkleprotectCallbackEvaluate(e) {
 						if (input.movelevel) {
 							thispage.setMoveProtection(input.movelevel, input.moveexpiry);
 						} else {
-							alert('You must chose a move protection level!');
+							alert('Je moet een titelbeveiligingsniveau kiezen.');
 							return;
 						}
 					}
@@ -1008,7 +1009,7 @@ Twinkle.protect.callback.evaluate = function twinkleprotectCallbackEvaluate(e) {
 				}
 
 				if (input.protectReason_notes_rfppRevid && !/^\d+$/.test(input.protectReason_notes_rfppRevid)) {
-					alert('Het gegeven oldid is onjuist, controleer het opgegeven oldid (ook wel revisionid genoemd).');
+					alert('Het gegeven revisienummer is geen nummer. Controleer of hier het juiste revisienummer ("oldid" in de permanente koppeling) ingevuld is.');
 					return;
 				}
 
@@ -1099,7 +1100,7 @@ Twinkle.protect.callback.evaluate = function twinkleprotectCallbackEvaluate(e) {
 				case 'aanmaak-heraanmaak':
 				case 'aanmaak-spam':
 				case 'aanmaak-blp':
-					typename = 'heraanmaakbeveiliging';
+					typename = 'aanmaakbeveiliging';
 					break;
 				case 'unprotect':
 					var admins = $.map(Twinkle.protect.currentProtectionLevels, function(pl) {
@@ -1113,7 +1114,7 @@ Twinkle.protect.callback.evaluate = function twinkleprotectCallbackEvaluate(e) {
 					}
 					// otherwise falls through
 				default:
-					typename = 'unprotection';
+					typename = 'opheffen beveiliging';
 					break;
 			}
 			switch (input.category) {
