@@ -2453,6 +2453,26 @@ Morebits.wiki.api.prototype = {
 
 };
 
+/** Retrieves wikitext from a page. Caching enabled, duration 1 day. */
+Morebits.wiki.getCachedJson = function(title) {
+	var query = {
+		action: 'query',
+		prop: 'revisions',
+		titles: title,
+		rvslots: '*',
+		rvprop: 'content',
+		format: 'json',
+		smaxage: '86400', // cache for 1 day
+		maxage: '86400' // cache for 1 day
+	};
+	return new Morebits.wiki.api('', query).post().then(function(apiobj) {
+		apiobj.getStatusElement().unlink();
+		var response = apiobj.getResponse();
+		var wikitext = response.query.pages[0].revisions[0].slots.main.content;
+		return JSON.parse(wikitext);
+	});
+};
+
 var morebitsWikiApiUserAgent = 'morebits.js ([[w:WT:TW]])';
 /**
 	 * Set the custom user agent header, which is used for server-side logging.
@@ -4852,28 +4872,24 @@ Morebits.wikitext.page.prototype = {
 		 * @returns {Morebits.wikitext.page}
 		 */
 	removeLink: function(link_target) {
-		// Remove a leading colon, to be handled later
-		if (link_target.indexOf(':') === 0) {
-			link_target = link_target.slice(1);
+		var mwTitle = mw.Title.newFromText(link_target);
+		var namespaceID = mwTitle.getNamespaceId();
+		var title = mwTitle.getMainText();
+
+		var link_regex_string = '';
+		if (namespaceID !== 0) {
+			link_regex_string = Morebits.namespaceRegex(namespaceID) + ':';
 		}
-		var link_re_string = '', ns = '', title = link_target;
+		link_regex_string += Morebits.pageNameRegex(title);
 
-		var idx = link_target.indexOf(':');
-		if (idx > 0) {
-			ns = link_target.slice(0, idx);
-			title = link_target.slice(idx + 1);
+		// For most namespaces, unlink both [[User:Test]] and [[:User:Test]]
+		// For files and categories, only unlink [[:Category:Test]]. Do not unlink [[Category:Test]]
+		var isFileOrCategory = [6, 14].indexOf(namespaceID) !== -1;
+		var colon = isFileOrCategory ? ':' : ':?';
 
-			link_re_string = Morebits.namespaceRegex(mw.config.get('wgNamespaceIds')[ns.toLowerCase().replace(/ /g, '_')]) + ':';
-		}
-		link_re_string += Morebits.pageNameRegex(title);
-
-		// Allow for an optional leading colon, e.g. [[:User:Test]]
-		// Files and Categories become links with a leading colon, e.g. [[:File:Test.png]]
-		var colon = new RegExp(Morebits.namespaceRegex([6, 14])).test(ns) ? ':' : ':?';
-
-		var link_simple_re = new RegExp('\\[\\[' + colon + '(' + link_re_string + ')\\]\\]', 'g');
-		var link_named_re = new RegExp('\\[\\[' + colon + link_re_string + '\\|(.+?)\\]\\]', 'g');
-		this.text = this.text.replace(link_simple_re, '$1').replace(link_named_re, '$1');
+		var simple_link_regex = new RegExp('\\[\\[' + colon + '(' + link_regex_string + ')\\]\\]', 'g');
+		var piped_link_regex = new RegExp('\\[\\[' + colon + link_regex_string + '\\|(.+?)\\]\\]', 'g');
+		this.text = this.text.replace(simple_link_regex, '$1').replace(piped_link_regex, '$1');
 		return this;
 	},
 
@@ -4900,10 +4916,10 @@ Morebits.wikitext.page.prototype = {
 			if (links_re.test(allLinks[i])) {
 				var replacement = '<!-- ' + reason + allLinks[i] + ' -->';
 				unbinder.content = unbinder.content.replace(allLinks[i], replacement);
+				// unbind the newly created comments
+				unbinder.unbind('<!--', '-->');
 			}
 		}
-		// unbind the newly created comments
-		unbinder.unbind('<!--', '-->');
 
 		// Check for gallery images, i.e. instances that must start on a new line,
 		// eventually preceded with some space, and must include File: prefix

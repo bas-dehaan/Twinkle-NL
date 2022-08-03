@@ -391,8 +391,7 @@ Twinkle.arv.callback.evaluate = function(e) {
 		// WP:SOKPOP
 		case 'sokpop':
 			var sockParameters = {
-				evidence: form.evidence.value.trim(),
-				notify: form.notify.checked
+				evidence: form.evidence.value.trim()
 			};
 
 			var puppetReport = false; // TODO deze bodge wegwerken
@@ -414,54 +413,10 @@ Twinkle.arv.callback.evaluate = function(e) {
 Twinkle.arv.processSock = function(params) {
 	Morebits.wiki.addCheckpoint(); // prevent notification events from causing an erronous "action completed"
 
-	// notify all user accounts if requested
-	if (params.notify && params.sockpuppets.length > 0) {
-
-		var notifyEditSummary = 'Op de hoogte brengen van aanvraag CU-onderzoek.';
-		var notifyText = '\n\n{{subst:ws-sokpop|1=' + params.uid + '}} ~~~~';
-
-		// notify user's master account
-		var masterTalkPage = new Morebits.wiki.page('Overleg gebruiker:' + params.uid, 'op de hoogte brengen van onderzoek');
-		masterTalkPage.setFollowRedirect(true);
-		masterTalkPage.setEditSummary(notifyEditSummary);
-		masterTalkPage.setChangeTags(Twinkle.changeTags);
-		masterTalkPage.setAppendText(notifyText);
-		masterTalkPage.append();
-
-		var statusIndicator = new Morebits.status('Alle gebruikers op de hoogte brengen', '0%');
-		var total = params.sockpuppets.length;
-		var current = 0;
-
-		// display status of notifications as they progress
-		var onSuccess = function(sockTalkPage) {
-			var now = parseInt(100 * ++current / total, 10) + '%';
-			statusIndicator.update(now);
-			sockTalkPage.getStatusElement().unlink();
-			if (current >= total) {
-				statusIndicator.info(now + ' (voltooid)');
-			}
-		};
-
-		var socks = params.sockpuppets;
-
-		// notify each puppet account
-		for (var i = 0; i < socks.length; ++i) {
-			var sockTalkPage = new Morebits.wiki.page('Overleg gebruiker:' + socks[i], 'Bericht voor ' + socks[i]);
-			sockTalkPage.setFollowRedirect(true);
-			sockTalkPage.setEditSummary(notifyEditSummary);
-			sockTalkPage.setChangeTags(Twinkle.changeTags);
-			sockTalkPage.setAppendText(notifyText);
-			sockTalkPage.append(onSuccess);
-		}
-	}
-
-	// prepare the report
-
-	// Voorals nog ondersteund sjabloon:Aanvraagcheckuser max. 3 sokpoppen,
-	// worden dat er meer dan is een loop wel zo netjes.
+	// prepare the SPI report
 	var verzoek = '\n\n{{subst:Aanvraagcheckuser\n|Hoofdaccount=' + params.uid;
-	for (var sokloop = 0; sokloop < params.sockpuppets.length; ++sokloop) {
-		verzoek += '\n|Sokpop' + (sokloop + 1) + '=' + params.sockpuppets[sokloop];
+	for (var i = 0; i < params.sockpuppets.length; ++i) {
+		verzoek += '\n|Sokpop' + (i + 1) + '=' + params.sockpuppets[i];
 	}
 	verzoek += '\n|Motivering=' + params.evidence + ' &ndash; ';
 	verzoek += '\n}}';
