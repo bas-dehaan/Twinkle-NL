@@ -552,7 +552,7 @@ Twinkle.xfd.callbacks = {
 			var statelem = pageobj.getStatusElement();
 
 			var date = new Morebits.date(pageobj.getLoadTime());
-			var daypage = 'Wikipedia:Te beoordelen pagina\'s/Toegevoegd ' + date.format('YYYYMMDD', '120');
+			var daypage = 'Wikipedia:Te beoordelen pagina\'s/Toegevoegd ' + date.format('YYYYMMDD', 'Europe/Berlin');
 
 			if (!pageobj.exists()) {
 				statelem.error('Het lijkt erop dat de pagina niet bestaat; misschien is de pagina al verwijderd?');

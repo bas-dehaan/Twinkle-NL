@@ -2007,11 +2007,26 @@ Morebits.date.prototype = {
 		}
 		var udate = this;
 		// create a new date object that will contain the date to display as system time
-		if (zone === 'utc') {
-			udate = new Morebits.date(this.getTime()).add(this.getTimezoneOffset(), 'minutes');
-		} else if (typeof zone === 'number') {
+		if (typeof zone === 'string') {
+			// Convert "Europe/Berlin" into a string like "2022, GMT+01:00"
+			try {
+				var zoneParts = udate.toLocaleString('en', {
+					year: 'numeric',
+					timeZone: zone,
+					timeZoneName: 'longOffset'
+				}).match(/\d+|\+|\-/g);
+				var sign = zoneParts[1];
+				var hr = zoneParts[2];
+				var min = zoneParts[3];
+				zone = (sign == '+'? 1 : -1) * (hr * 60 + min * 1);
+			} catch (e) {
+				// Fallback to UTC
+				zone = 0;
+			}
+		}
+		if (typeof zone === 'number') {
 			// convert to utc, then add the utc offset given
-			udate = new Morebits.date(this.getTime()).add(this.getTimezoneOffset() + zone, 'minutes');
+			udate = new Morebits.date(this.getTime()).add(zone, 'minutes');
 		}
 
 		// default to ISOString
@@ -2024,20 +2039,24 @@ Morebits.date.prototype = {
 			return ('00' + num).toString().slice(0 - len);
 		};
 
-		var h24 = udate.getHours(), m = udate.getMinutes(), s = udate.getSeconds(), ms = udate.getMilliseconds();
-		var D = udate.getDate(), M = udate.getMonth() + 1, Y = udate.getFullYear();
+		var Y = udate.getUTCFullYear();
+		var M = udate.getUTCMonth() + 1;
+		var D = udate.getUTCDate();
+		var h24 = udate.getUTCHours();
+		var m = udate.getUTCMinutes()
+		var s = udate.getUTCSeconds();
+		var ms = udate.getUTCMilliseconds();
 		var h12 = h24 % 12 || 12, amOrPm = h24 >= 12 ? 'PM' : 'AM';
 		var replacementMap = {
 			HH: pad(h24), H: h24, hh: pad(h12), h: h12, A: amOrPm,
 			mm: pad(m), m: m,
 			ss: pad(s), s: s,
 			SSS: pad(ms, 3),
-			dddd: udate.getDayName(), ddd: udate.getDayNameAbbrev(), d: udate.getDay(),
+			dddd: udate.getUTCDayName(), ddd: udate.getUTCDayNameAbbrev(), d: udate.getUTCDay(),
 			DD: pad(D), D: D,
-			MMMM: udate.getMonthName(), MMM: udate.getMonthNameAbbrev(), MM: pad(M), M: M,
+			MMMM: udate.getUTCMonthName(), MMM: udate.getUTCMonthNameAbbrev(), MM: pad(M), M: M,
 			YYYY: Y, YY: pad(Y % 100), Y: Y
 		};
-
 
 		var unbinder = new Morebits.unbinder(formatstr); // escape stuff between [...]
 		unbinder.unbind('\\[', '\\]');
