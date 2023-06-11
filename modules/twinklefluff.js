@@ -47,6 +47,15 @@ Twinkle.fluff = function twinklefluff() {
 		Twinkle.fluff.skipTalk = !Twinkle.getPref('openTalkPageOnAutoRevert');
 		Twinkle.fluff.rollbackInPlace = Twinkle.getPref('rollbackInPlace');
 
+		// Enhance dynamic diffs from tools like RTRC with Twinkle fluff
+		// We acknowledge the compromise that, unlike for standalone diffs (in the code above),
+		// we unconditionally enhance dynamic diffs, as we do not know which page
+		// they are about and whether the user can edit those.
+		// https://github.com/wikimedia-gadgets/twinkle/issues/1431
+		mw.hook('wikipage.diff').add(function () {
+			Twinkle.fluff.addLinks.diff();
+		});
+
 		if (mw.config.get('wgCanonicalSpecialPageName') === 'Contributions') {
 			Twinkle.fluff.addLinks.contributions();
 		} else if (mw.config.get('wgCanonicalSpecialPageName') === 'Recentchanges' || mw.config.get('wgCanonicalSpecialPageName') === 'Recentchangeslinked') {
@@ -359,7 +368,7 @@ Twinkle.fluff.revert = function revertPage(type, vandal, rev, page) {
 		var notifyStatus = document.createElement('span');
 		mw.notify(notifyStatus, {
 			autoHide: false,
-			title: 'Terugdraaiing op' + page,
+			title: 'Terugdraaiing op ' + page,
 			tag: 'twinklefluff_' + rev // Shouldn't be necessary given disableLink
 		});
 		Morebits.status.init(notifyStatus);

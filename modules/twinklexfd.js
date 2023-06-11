@@ -83,7 +83,7 @@ Twinkle.xfd.currentRationale = null;
 // error callback on Morebits.status.object
 Twinkle.xfd.printRationale = function twinklexfdPrintRationale() {
 	if (Twinkle.xfd.currentRationale) {
-		Morebits.status.printUserText(Twinkle.xfd.currentRationale, 'Je nominatiereden wordt hieronder weergeven, welke je kunt kopiëren-en-plakken naar een nieuw TBx scherm voor als je opnieuw wil beginnen:');
+		Morebits.status.printUserText(Twinkle.xfd.currentRationale, 'Je nominatiereden wordt hieronder weergegeven, welke je kunt kopiëren-en-plakken naar een nieuw TBx-scherm  voor als je opnieuw wil beginnen:');
 		// only need to print the rationale once
 		Twinkle.xfd.currentRationale = null;
 	}
@@ -552,7 +552,7 @@ Twinkle.xfd.callbacks = {
 			var statelem = pageobj.getStatusElement();
 
 			var date = new Morebits.date(pageobj.getLoadTime());
-			var daypage = 'Wikipedia:Te beoordelen pagina\'s/Toegevoegd ' + date.format('YYYYMMDD', '120');
+			var daypage = 'Wikipedia:Te beoordelen pagina\'s/Toegevoegd ' + date.format('YYYYMMDD', 'Europe/Berlin');
 
 			if (!pageobj.exists()) {
 				statelem.error('Het lijkt erop dat de pagina niet bestaat; misschien is de pagina al verwijderd?');
