@@ -27,7 +27,7 @@ Twinkle.shared.callback = function friendlysharedCallback() {
 	Window.setScriptName('Twinkle');
 	Window.addFooterLink('Shared prefs', 'WP:TW/PREF#shared');
 	Window.addFooterLink('Twinkle help', 'WP:TW/DOC#shared');
-	Window.addFooterLink('Give feedback', 'WT:TW');
+	Window.addFooterLink('Give feedback', 'Overleg Wikipedia:Twinkle');
 
 	var form = new Morebits.quickForm(Twinkle.shared.callback.evaluate);
 

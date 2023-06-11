@@ -58,7 +58,7 @@ Twinkle.speedy.initDialog = function twinklespeedyInitDialog(callbackfunc) {
 	dialog.addFooterLink('Directe verwijderingsrichtlijnen', 'WP:RVM#Een_pagina_direct_verwijderen');
 	dialog.addFooterLink('Nuweg voorkeuren', 'WP:TW/PREF#speedy');
 	dialog.addFooterLink('Twinkle help', 'WP:TW/DOC#speedy');
-	dialog.addFooterLink('Geef feedback', 'WT:TW');
+	dialog.addFooterLink('Geef feedback', 'Overleg Wikipedia:Twinkle');
 
 	var form = new Morebits.quickForm(callbackfunc, Twinkle.getPref('speedySelectionStyle') === 'radioClick' ? 'change' : null);
 	if (Morebits.userIsSysop) {

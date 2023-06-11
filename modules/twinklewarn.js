@@ -407,7 +407,7 @@ Twinkle.warn.callback.change_category = function twinklewarnCallbackChangeCatego
 		// scaled levels from singlenotice, singlewarn, and custom
 		var level = val.replace(/^\D+/g, '');
 		// due to an apparent iOS bug, we have to add an option-group to prevent truncation of text
-		// (search WT:TW archives for "Problem selecting warnings on an iPhone")
+		// (search Overleg Wikipedia:Twinkle archives for "Problem selecting warnings on an iPhone")
 		if (wrapInOptgroup && $.client.profile().platform === 'iphone') {
 			var wrapperOptgroup = new Morebits.quickForm.element({
 				type: 'optgroup',
