@@ -83,7 +83,7 @@ Twinkle.xfd.currentRationale = null;
 // error callback on Morebits.status.object
 Twinkle.xfd.printRationale = function twinklexfdPrintRationale() {
 	if (Twinkle.xfd.currentRationale) {
-		Morebits.status.printUserText(Twinkle.xfd.currentRationale, 'Je nominatiereden wordt hieronder weergeven, welke je kunt kopiëren-en-plakken naar een nieuw TBx scherm voor als je opnieuw wil beginnen:');
+		Morebits.status.printUserText(Twinkle.xfd.currentRationale, 'Je nominatiereden wordt hieronder weergegeven, welke je kunt kopiëren-en-plakken naar een nieuw TBx-scherm  voor als je opnieuw wil beginnen:');
 		// only need to print the rationale once
 		Twinkle.xfd.currentRationale = null;
 	}

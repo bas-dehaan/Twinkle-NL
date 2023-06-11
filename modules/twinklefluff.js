@@ -359,7 +359,7 @@ Twinkle.fluff.revert = function revertPage(type, vandal, rev, page) {
 		var notifyStatus = document.createElement('span');
 		mw.notify(notifyStatus, {
 			autoHide: false,
-			title: 'Terugdraaiing op' + page,
+			title: 'Terugdraaiing op ' + page,
 			tag: 'twinklefluff_' + rev // Shouldn't be necessary given disableLink
 		});
 		Morebits.status.init(notifyStatus);
