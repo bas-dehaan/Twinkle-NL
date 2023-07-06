@@ -303,7 +303,7 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 		if (outerNavClass.indexOf('vector-menu-dropdown') !== -1) {
 			var chkbox = document.createElement('input');
 			chkbox.id = id + '-dropdown-checkbox';
-			chkbox.className = 'vector-menu-checkbox vector-dropdown-checkbox'
+			chkbox.className = 'vector-menu-checkbox vector-dropdown-checkbox';
 			chkbox.setAttribute('type', 'checkbox');
 			chkbox.setAttribute('aria-labelledby', id + '-label');
 			outerNav.appendChild(chkbox);
