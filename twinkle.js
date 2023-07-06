@@ -280,7 +280,7 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 	}
 
 	// Build the DOM elements.
-		var outerNav, heading;
+	var outerNav, heading;
 	if (skin === 'vector-2022') {
 		outerNav = document.createElement('div');
 		heading = document.createElement('label');
