@@ -219,11 +219,11 @@ Twinkle.getPref = function twinkleGetPref(name) {
  *  "mw_contentwrapper" (top nav), outer nav class "portlet", inner div class "pBody". Existing portlets or elements: "p-cactions", "mw_content"
  *  "mw_portlets" (sidebar), outer nav class "portlet", inner div class "pBody". Existing portlets: "p-navigation", "p-search", "p-interaction", "p-tb", "p-coll-print_export"
  *
- * @param navigation -- id of the target navigation area (skin dependant, on vector either of "left-navigation", "right-navigation", or "mw-panel")
- * @param id -- id of the portlet menu to create, preferably start with "p-".
- * @param text -- name of the portlet menu to create. Visibility depends on the class used.
- * @param type -- type of portlet. Currently only used for the vector non-sidebar portlets, pass "menu" to make this portlet a drop down menu.
- * @param nextnodeid -- the id of the node before which the new item should be added, should be another item in the same list, or undefined to place it at the end.
+ * @param {String} navigation id of the target navigation area (skin dependant, on vector either of "left-navigation", "right-navigation", or "mw-panel")
+ * @param {String} id id of the portlet menu to create, preferably start with "p-".
+ * @param {String} text name of the portlet menu to create. Visibility depends on the class used.
+ * @param {String} type type of portlet. Currently only used for the vector non-sidebar portlets, pass "menu" to make this portlet a drop down menu.
+ * @param {Node} nextnodeid the id of the node before which the new item should be added, should be another item in the same list, or undefined to place it at the end.
  *
  * @return Node -- the DOM node of the new item (a DIV element) or null
  */
@@ -261,7 +261,7 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 				navigation = 'mw-panel';
 			}
 			outerNavClass = 'mw-portlet vector-menu vector-menu-' + (navigation === 'mw-panel' ? 'portal' : type === 'menu' ? 'dropdown vector-menu-dropdown-noicon' : 'tabs');
-			innerDivClass = 'vector-menu-content';
+			innerDivClass = 'vector-menu-content vector-dropdown-content';
 			break;
 		case 'modern':
 			if (navigation !== 'mw_portlets' && navigation !== 'mw_contentwrapper') {
@@ -296,13 +296,14 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 
 	if (skin === 'vector' || skin === 'vector-2022') {
 		ul.className = 'vector-menu-content-list';
-		h3.className = 'vector-menu-heading';
+		h3.className = 'vector-menu-heading vector-dropdown-label';
 
 		// add invisible checkbox to keep menu open when clicked
 		// similar to the p-cactions ("More") menu
 		if (outerNavClass.indexOf('vector-menu-dropdown') !== -1) {
 			var chkbox = document.createElement('input');
-			chkbox.className = 'vector-menu-checkbox';
+			chkbox.id = id + '-dropdown-checkbox';
+			chkbox.className = 'vector-menu-checkbox vector-dropdown-checkbox'
 			chkbox.setAttribute('type', 'checkbox');
 			chkbox.setAttribute('aria-labelledby', id + '-label');
 			outerNav.appendChild(chkbox);
