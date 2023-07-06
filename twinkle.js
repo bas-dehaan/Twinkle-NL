@@ -219,11 +219,11 @@ Twinkle.getPref = function twinkleGetPref(name) {
  *  "mw_contentwrapper" (top nav), outer nav class "portlet", inner div class "pBody". Existing portlets or elements: "p-cactions", "mw_content"
  *  "mw_portlets" (sidebar), outer nav class "portlet", inner div class "pBody". Existing portlets: "p-navigation", "p-search", "p-interaction", "p-tb", "p-coll-print_export"
  *
- * @param navigation -- id of the target navigation area (skin dependant, on vector either of "left-navigation", "right-navigation", or "mw-panel")
- * @param id -- id of the portlet menu to create, preferably start with "p-".
- * @param text -- name of the portlet menu to create. Visibility depends on the class used.
- * @param type -- type of portlet. Currently only used for the vector non-sidebar portlets, pass "menu" to make this portlet a drop down menu.
- * @param nextnodeid -- the id of the node before which the new item should be added, should be another item in the same list, or undefined to place it at the end.
+ * @param {String} navigation id of the target navigation area (skin dependant, on vector either of "left-navigation", "right-navigation", or "mw-panel")
+ * @param {String} id id of the portlet menu to create, preferably start with "p-".
+ * @param {String} text name of the portlet menu to create. Visibility depends on the class used.
+ * @param {String} type type of portlet. Currently only used for the vector non-sidebar portlets, pass "menu" to make this portlet a drop down menu.
+ * @param {Node} nextnodeid the id of the node before which the new item should be added, should be another item in the same list, or undefined to place it at the end.
  *
  * @return Node -- the DOM node of the new item (a DIV element) or null
  */
@@ -260,8 +260,8 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 			if (navigation !== 'portal' && navigation !== 'left-navigation' && navigation !== 'right-navigation') {
 				navigation = 'mw-panel';
 			}
-			outerNavClass = 'mw-portlet vector-menu vector-menu-' + (navigation === 'mw-panel' ? 'portal' : type === 'menu' ? 'dropdown vector-menu-dropdown-noicon' : 'tabs');
-			innerDivClass = 'vector-menu-content';
+			outerNavClass = 'mw-portlet vector-menu vector-menu-' + (navigation === 'mw-panel' ? 'portal' : type === 'menu' ? 'dropdown vector-dropdown vector-menu-dropdown-noicon' : 'tabs');
+			innerDivClass = 'vector-menu-content vector-dropdown-content';
 			break;
 		case 'modern':
 			if (navigation !== 'mw_portlets' && navigation !== 'mw_contentwrapper') {
@@ -280,7 +280,14 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 	}
 
 	// Build the DOM elements.
-	var outerNav = document.createElement('nav');
+	var outerNav, heading;
+	if (skin === 'vector-2022') {
+		outerNav = document.createElement('div');
+		heading = document.createElement('label');
+	} else {
+		outerNav = document.createElement('nav');
+		heading = document.createElement('h3');
+	}
 	outerNav.setAttribute('aria-labelledby', id + '-label');
 	outerNav.className = outerNavClass + ' emptyPortlet';
 	outerNav.id = id;
@@ -290,19 +297,20 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 		root.appendChild(outerNav);
 	}
 
-	var h3 = document.createElement('h3');
-	h3.id = id + '-label';
+	heading.id = id + '-label';
 	var ul = document.createElement('ul');
 
 	if (skin === 'vector' || skin === 'vector-2022') {
+		heading.setAttribute('for', id + '-dropdown-checkbox');
 		ul.className = 'vector-menu-content-list';
-		h3.className = 'vector-menu-heading';
+		heading.className = 'vector-menu-heading vector-dropdown-label';
 
 		// add invisible checkbox to keep menu open when clicked
 		// similar to the p-cactions ("More") menu
 		if (outerNavClass.indexOf('vector-menu-dropdown') !== -1) {
 			var chkbox = document.createElement('input');
-			chkbox.className = 'vector-menu-checkbox';
+			chkbox.id = id + '-dropdown-checkbox';
+			chkbox.className = 'vector-menu-checkbox vector-dropdown-checkbox';
 			chkbox.setAttribute('type', 'checkbox');
 			chkbox.setAttribute('aria-labelledby', id + '-label');
 			outerNav.appendChild(chkbox);
@@ -311,7 +319,7 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 			// timeless have no title, and it has no span
 			var span = document.createElement('span');
 			span.appendChild(document.createTextNode(text));
-			h3.appendChild(span);
+			heading.appendChild(span);
 
 			var a = document.createElement('a');
 			a.href = '#';
@@ -320,14 +328,14 @@ Twinkle.addPortlet = function(navigation, id, text, type, nextnodeid) {
 				e.preventDefault();
 			});
 
-			h3.appendChild(a);
+			heading.appendChild(a);
 		}
 	} else {
 		// Basically just Timeless
-		h3.appendChild(document.createTextNode(text));
+		heading.appendChild(document.createTextNode(text));
 	}
 
-	outerNav.appendChild(h3);
+	outerNav.appendChild(heading);
 
 	if (innerDivClass) {
 		var innerDiv = document.createElement('div');
