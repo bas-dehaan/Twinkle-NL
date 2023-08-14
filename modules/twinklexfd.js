@@ -234,15 +234,15 @@ Twinkle.xfd.callback.change_category = function twinklexfdCallbackChangeCategory
 
 			var sjabloon_select = work_area.append({
 				type: 'select',
-				label: 'Sjabloon:',
+				label: 'Nominatie categorie:',
 				name: 'sjabloon'
 			});
-			sjabloon_select.append({ type: 'option', label: '{{verwijderen}} Algemene nominatie', value: 'verwijderen', selected: true });
-			sjabloon_select.append({ type: 'option', label: '{{wiu}} Werk in uitvoering', value: 'wiu'});
-			sjabloon_select.append({ type: 'option', label: '{{ne}} Niet encyclopedisch', value: 'ne' });
-			sjabloon_select.append({ type: 'option', label: '{{wb}} Woordenboekdefinitie', value: 'wb' });
-			sjabloon_select.append({ type: 'option', label: '{{reclame}} Promotionele uiting', value: 'reclame' });
-			sjabloon_select.append({ type: 'option', label: '{{auteur}} Schending auteursrechten', value: 'auteur' });
+			sjabloon_select.append({ type: 'option', label: 'Slgemene nominatie', value: 'verwijderen', selected: true });
+			sjabloon_select.append({ type: 'option', label: 'Werk in uitvoering', value: 'wiu'});
+			sjabloon_select.append({ type: 'option', label: 'Niet encyclopedisch', value: 'ne' });
+			sjabloon_select.append({ type: 'option', label: 'Woordenboekdefinitie', value: 'wb' });
+			sjabloon_select.append({ type: 'option', label: 'Promotionele uiting', value: 'reclame' });
+			sjabloon_select.append({ type: 'option', label: 'Schending auteursrechten', value: 'auteur' });
 
 			if ((mw.config.get('wgNamespaceNumber') === 2 /* Gebruiker: */ || mw.config.get('wgNamespaceNumber') === 3 /* Overleg gebruiker: */) && mw.config.exists('wgRelevantUserName')) {
 				work_area.append({
@@ -560,7 +560,7 @@ Twinkle.xfd.callbacks = {
 			}
 
 			// Check for existing AfD tag, for the benefit of new page patrollers
-			var textNoAfd = text.replace(/{{\s*(wiu|ne|wb|auteur|reclame|weg|verwijderen)(?:\s*\||\s*}})/ig, '');
+			var textNoAfd = text.replace(/{{\s*(wiu|ne|wb|auteur|reclame|weg|weg2|verwijderen)(?:\s*\||\s*}})/ig, '');
 			if (text !== textNoAfd) {
 				if (confirm('Een TBP sjabloon is al gevonden op dit artikel. Misschien was iemand sneller.  \nKlik op OK om de nominatie te vervangen met jouw nominatie (niet verstandig), of Cancel om je nominatie af te breken.')) {
 					text = textNoAfd;
@@ -597,7 +597,7 @@ Twinkle.xfd.callbacks = {
 				Twinkle.xfd.callbacks.addToLog(params, null);
 			}
 
-			params.tagText = '{{' + params.sjabloon + '|1=' + params.reason + '|2={{subst:LOCALYEAR}}|3={{subst:LOCALMONTH}}|4={{subst:LOCALDAY2}}}}\n';
+			params.tagText = '{{verwijderen|2={{subst:LOCALYEAR}}|3={{subst:LOCALMONTH}}|4={{subst:LOCALDAY2}}}}\n';
 
 			if (pageobj.canEdit()) {
 				// Remove some tags that should always be removed on AfD.
