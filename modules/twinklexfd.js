@@ -237,7 +237,7 @@ Twinkle.xfd.callback.change_category = function twinklexfdCallbackChangeCategory
 				label: 'Nominatie categorie:',
 				name: 'sjabloon'
 			});
-			sjabloon_select.append({ type: 'option', label: 'Slgemene nominatie', value: 'verwijderen', selected: true });
+			sjabloon_select.append({ type: 'option', label: 'Algemene nominatie', value: 'verwijderen', selected: true });
 			sjabloon_select.append({ type: 'option', label: 'Werk in uitvoering', value: 'wiu'});
 			sjabloon_select.append({ type: 'option', label: 'Niet encyclopedisch', value: 'ne' });
 			sjabloon_select.append({ type: 'option', label: 'Woordenboekdefinitie', value: 'wb' });
