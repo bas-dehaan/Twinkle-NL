@@ -828,7 +828,7 @@ Twinkle.protect.protectionPresetsInfo = {
 		edit: 'extendedconfirmed',
 		move: 'extendedconfirmed',
 		expiry: 'infinity',
-		reason: '[[WP:BWO|Bewerkingsoorlog]]',
+		reason: 'Herhaald misbruik door sokpoppen',
 	},
 	'extended-recent': {
 		edit: 'extendedconfirmed',
