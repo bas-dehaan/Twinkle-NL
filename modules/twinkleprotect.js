@@ -691,7 +691,7 @@ Twinkle.protect.protectionTypes = [
 			{ label: 'Reclame/zelfpromotie (extended)', value: 'extended-spam' },
 			{ label: 'Archiefpagina (extended)', value: 'extended-archief' }
 		]
-	}
+	},
 	{
 		label: 'Semi-beveiliging',
 		list: [
