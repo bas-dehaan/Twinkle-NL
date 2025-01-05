@@ -811,46 +811,46 @@ Twinkle.protect.protectionPresetsInfo = {
 	'extended-bwo': {
 		edit: 'extendedconfirmed',
 		move: 'extendedconfirmed',
-		reason: '[[WP:BWO|Bewerkingsoorlog]]',
+		reason: '[[WP:BWO|Bewerkingsoorlog]]'
 	},
 	'extended-vandalisme': {
 		edit: 'extendedconfirmed',
 		move: 'extendedconfirmed',
-		reason: '[[WP:Vandalisme|Herhaald vandalisme]], stoppen vereist extendedconfirmed beveiliging', 
+		reason: '[[WP:Vandalisme|Herhaald vandalisme]], stoppen vereist extendedconfirmed beveiliging'
 	},
 	'extended-blp': {
 		edit: 'extendedconfirmed',
 		move: 'extendedconfirmed',
 		expiry: 'infinity',
-		reason: '[[WP:BLP|Herhaalde schending WP:BLP]]',
+		reason: '[[WP:BLP|Herhaalde schending WP:BLP]]'
 	},
 	'extended-sokpop': {
 		edit: 'extendedconfirmed',
 		move: 'extendedconfirmed',
 		expiry: 'infinity',
-		reason: 'Herhaald misbruik door sokpoppen',
+		reason: 'Herhaald misbruik door sokpoppen'
 	},
 	'extended-recent': {
 		edit: 'extendedconfirmed',
 		move: 'extendedconfirmed',
-		reason: 'Beveiliging wegens actuele/recente gebeurtenissen en ontwikkelingen',
+		reason: 'Beveiliging wegens actuele/recente gebeurtenissen en ontwikkelingen'
 	},
 	'extended-veelbezocht': {
 		edit: 'extendedconfirmed',
 		move: 'extendedconfirmed',
-		reason: 'Preventieve beveiliging v/e veelbezochte pagina',
+		reason: 'Preventieve beveiliging v/e veelbezochte pagina'
 	},
 	'extended-spam': {
 		edit: 'extendedconfirmed',
 		move: 'extendedconfirmed',
 		expiry: 'infinity',
-		reason: 'Herhaaldelijke expliciete reclame, werving, propaganda of zelfpromotie',
+		reason: 'Herhaaldelijke expliciete reclame, werving, propaganda of zelfpromotie'
 	},
 	'extended-archief': {
 		edit: 'extendedconfirmed',
 		move: 'extendedconfirmed',
 		expiry: 'infinity',
-		reason: 'Archiefpagina',
+		reason: 'Archiefpagina'
 	},
 	'semi-algemeen': {
 		edit: 'autoconfirmed',
@@ -1211,7 +1211,7 @@ Twinkle.protect.callback.evaluate = function twinkleprotectCallbackEvaluate(e) {
 					typereason = 'Herhaaldelijke expliciete reclame, werving, propaganda of zelfpromotie';
 					break;
 				case 'full-recent':
-				case 'extended-recent': 
+				case 'extended-recent':
 				case 'semi-recent':
 					typereason = 'Naar aanleiding van actualiteiten en recente ontwikkelingen';
 					break;
